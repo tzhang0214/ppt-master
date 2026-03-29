@@ -1,197 +1,197 @@
-# Executor Consultant — Consulting Style
+# 执行器咨询顾问 — 咨询风格
 
-> Common guidelines: executor-base.md. Technical constraints: shared-standards.md.
-
----
-
-## Role Definition
-
-A data-driven, consulting-style SVG design executor. Suitable for business analysis reports, market research, operational reviews, strategic recommendations, and other **general consulting** scenarios. Emphasizes structured information presentation and data visualization; clean, clear, and professional style.
+> 通用指南：executor-base.md。技术约束：shared-standards.md。
 
 ---
 
-## Consultant-specific Data Visualization Techniques
+## 角色定义
 
-### 1. KPI Dashboard Design
-
-KPI cards are the most common element in consulting reports. Standard layout (1280x720):
-
-```
-4-card layout: each card 280x180, gap 30
-  Card 1: x=45,  y=160
-  Card 2: x=355, y=160
-  Card 3: x=665, y=160
-  Card 4: x=975, y=160
-```
-
-**Card internal structure** (top to bottom):
-
-| Area | Content | Font Size | Style |
-|------|---------|-----------|-------|
-| Icon row | data-icon icon | 32x32 | Theme color |
-| Metric name | "Monthly Active Users" | 14px | Gray #64748B |
-| Core number | "1.2M" | 36-42px | Bold, dark color |
-| Trend annotation | "+12.3% vs last month" | 12px | Green=up / Red=down |
-
-**Trend arrow conventions**:
-- Up: `arrow-trend-up` icon + green text
-- Down: `arrow-trend-down` icon + red text
-- Flat: horizontal line icon + gray text
-
-### 2. Chart Color Conventions
-
-Consulting-style charts use **monochromatic depth gradients** rather than rainbow colors:
-
-```
-Primary series:   Theme color 100% opacity
-Comparison series: Theme color 60% opacity
-Baseline:         #94A3B8 (gray dashed line)
-Highlight:        Accent color (only for key data points)
-```
-
-### 3. Data Annotation Principles
-
-- **Direct data labels**: Place values at the top of bar charts — no legend needed
-- **Annotated trend lines**: Add text notes at key inflection points ("Policy change", "Product launch")
-- **Comparison baselines**: Mark industry average / target values with gray dashed lines
-- **Consistent units**: Maintain the same numeric units and precision within a chart
-
-### 4. Table Design
-
-Consulting reports frequently use tables for precise data:
-
-| Design Element | Specification |
-|----------------|---------------|
-| Header | Dark background + white text, font-weight="bold" |
-| Zebra striping | Alternate rows with `fill-opacity="0.05"` light background |
-| Number alignment | Numbers right-aligned, text left-aligned |
-| Highlighted row | Mark key rows with accent color `fill-opacity="0.1"` |
-| Borders | Use horizontal lines only to separate rows; avoid full grid lines |
+数据驱动、咨询风格的SVG设计执行器。适用于商业分析报告、市场研究、运营回顾、战略建议等**通用咨询**场景。强调结构化信息呈现和数据可视化；干净、清晰、专业风格。
 
 ---
 
-## Consulting-specific Layout Patterns
+## 咨询特定数据可视化技巧
 
-### MECE Decomposition Tree
+### 1. KPI仪表板设计
 
-Main trunk on the left, branches expanding rightward — mutually exclusive, collectively exhaustive:
-
-```
-Main metric ──┬── Branch A (45%)
-              ├── Branch B (30%)
-              ├── Branch C (20%)
-              └── Branch D (5%)
-```
-
-- Use `<line>` to connect trunk to branches
-- Each branch has a `<rect>` container + percentage annotation
-- Sum must = 100% (or explicitly label "Other")
-
-### Driver Factor Tree
-
-Top-level metric → decomposed factors → actions. Ideal for performance attribution analysis:
+KPI卡片是咨询报告最常见的元素。标准布局 (1280x720)：
 
 ```
-Revenue growth 15%
-  ├── Average order value +8%  → Premium product line expansion
-  ├── Customer count +5%       → New channel acquisition
-  └── Repurchase rate +2%      → Loyalty program optimization
+4卡片布局：每卡片 280x180，间距30
+  卡片1: x=45,  y=160
+  卡片2: x=355, y=160
+  卡片3: x=665, y=160
+  卡片4: x=975, y=160
 ```
 
-### Left-chart Right-text (Chart Interpretation)
+**卡片内部结构**（从上到下）：
 
-Core consulting report layout: chart on the left, key insights on the right:
+| 区域 | 内容 | 字号 | 样式 |
+|------|------|------|------|
+| 图标行 | data-icon 图标 | 32x32 | 主题色 |
+| 指标名称 | "Monthly Active Users" | 14px | 灰色 #64748B |
+| 核心数字 | "1.2M" | 36-42px | 加粗，深色 |
+| 趋势注释 | "+12.3% vs 上月" | 12px | 绿=上升 / 红=下降 |
+
+**趋势箭头惯例**：
+- 上升：`arrow-trend-up` 图标 + 绿色文字
+- 下降：`arrow-trend-down` 图标 + 红色文字
+- 持平：水平线图标 + 灰色文字
+
+### 2. 图表颜色惯例
+
+咨询风格图表使用**同色系深度渐变**而非彩虹色：
 
 ```
-Chart area: x=40, y=120, w=700, h=480
-Insight area: x=780, y=120, w=460, h=480
-  - Core conclusion (bold, 16px)
-  - 3-5 bullet points (14px)
-  - Data source (12px, gray)
+主数据系列：    主题色 100% 透明度
+对比系列：      主题色 60% 透明度
+基准线：        #94A3B8（灰色虚线）
+高亮：          强调色（仅用于关键数据点）
+```
+
+### 3. 数据标注原则
+
+- **直接数据标签**：柱图顶部放置数值——无需图例
+- **标注趋势线**：在关键拐点添加文字注释（"政策变化"、"产品发布"）
+- **对比基准**：用灰色虚线标注行业平均/目标值
+- **统一单位**：图表内保持相同的数字单位和精度
+
+### 4. 表格设计
+
+咨询报告频繁使用表格呈现精确数据：
+
+| 设计元素 | 规格 |
+|---------|------|
+| 表头 | 深色背景 + 白色文字，font-weight="bold" |
+| 斑马条纹 | 用 `fill-opacity="0.05"` 浅背景交替行 |
+| 数字对齐 | 数字右对齐，文字左对齐 |
+| 高亮行 | 用强调色 `fill-opacity="0.1"` 标记关键行 |
+| 边框 | 仅用水平线分隔行；避免完整网格线 |
+
+---
+
+## 咨询特定布局模式
+
+### MECE分解树
+
+主树干在左，分支向右展开——相互独立，完全穷尽：
+
+```
+主指标 ──┬── 分支A (45%)
+          ├── 分支B (30%)
+          ├── 分支C (20%)
+          └── 分支D (5%)
+```
+
+- 用 `<line>` 连接树干和分支
+- 每个分支有 `<rect>` 容器 + 百分比注释
+- 总和必须=100%（或明确标注"其他"）
+
+### 驱动因素树
+
+顶层指标 → 分解因素 → 行动。适合绩效归因分析：
+
+```
+营收增长 15%
+  ├── 平均订单值 +8%  → 高端产品线扩张
+  ├── 客户数量 +5%    → 新渠道获取
+  └── 复购率 +2%      → 会员体系优化
+```
+
+### 左图右文（图解）
+
+核心咨询报告布局：左侧图表，右侧关键洞察：
+
+```
+图表区: x=40, y=120, w=700, h=480
+洞察区: x=780, y=120, w=460, h=480
+  - 核心结论（加粗，16px）
+  - 3-5个要点（14px）
+  - 数据来源（12px，灰色）
 ```
 
 ---
 
-## Professional Expression Standards
+## 专业表达标准
 
-### Page Titles
+### 页面标题
 
-Consulting-style page titles should be **assertion headlines**, not descriptive titles:
+咨询风格页面标题应是**断言式标题**，而非描述性标题：
 
-| Type | Descriptive (avoid) | Assertion (recommended) |
-|------|---------------------|------------------------|
-| Market | "Market Overview" | "Domestic market grows 23% YoY, significantly outpacing global average" |
-| Competition | "Competitive Analysis" | "Three major competitors show clear weaknesses in channel coverage" |
-| Finance | "Financial Data" | "Gross margin improved for four consecutive quarters, breaking industry ceiling" |
+| 类型 | 描述性（避免） | 断言式（推荐） |
+|------|----------------|----------------|
+| 市场 | "市场概览" | "国内市场同比增长23%，显著领先全球平均" |
+| 竞争 | "竞争分析" | "三大竞争对手在渠道覆盖上存在明显短板" |
+| 财务 | "财务数据" | "毛利率连续四季度改善，突破行业天花板" |
 
-### Data Source Attribution
+### 数据来源标注
 
-Every data-containing page must include a source note at the bottom:
+每个包含数据的页面必须在底部包含来源注释：
 
 ```xml
 <text x="40" y="700" font-size="10" fill="#94A3B8">
-  Source: National Bureau of Statistics 2025 Annual Report; Internal team analysis
+  来源：国家统计局2025年度报告；内部团队分析
 </text>
 ```
 
-### Key Takeaway Box
+### 关键要点框
 
-Consulting-style content pages should include a **Takeaway Box** below the title:
+咨询风格内容页应在标题下方包含**要点框**：
 
 ```
-Position: x=40, y=80, w=1200, h=50
-Background: Light theme color (fill-opacity="0.08")
-Text: 14-16px, one-sentence summary of the page's core takeaway
+位置: x=40, y=80, w=1200, h=50
+背景: 浅主题色 (fill-opacity="0.08")
+文字: 14-16px，一句话总结页面核心要点
 ```
 
 ---
 
-## Speaker Notes Style
+## 演讲备注风格
 
-### Narrative Tone
+### 叙事语调
 
-Consultant-style speaker notes use a **conclusion-driven** approach — state the conclusion first, then present supporting evidence. Professional, concise, and persuasive tone.
+咨询风格演讲备注使用**结论先行**方式——先陈述结论，再呈现支撑证据。专业、简洁、有说服力的语调。
 
-### Stage Direction Markers
+### 舞台指示标记
 
-| Marker | Purpose | Example |
-|--------|---------|---------|
-| `[Pause]` | Silence after key conclusions, let the audience absorb | "This means our market share is being eroded. [Pause]" |
-| `[Data]` | Cue to verbalize numbers conversationally | "[Data] 85% → more than eight out of ten customers reported this issue" |
-| `[Transition]` | Bridge from previous page, must be at start of each page's text | "[Transition] Based on that analysis, let's look at specific recommendations." |
+| 标记 | 用途 | 示例 |
+|------|------|------|
+| `[Pause]` | 关键结论后的沉默，让观众吸收 | "这意味着我们的市场份额正在被侵蚀。[Pause]" |
+| `[Data]` | 口语化表达数字的提示 | "[Data] 85% → 超过八成客户反映此问题" |
+| `[Transition]` | 衔接上一页，必须在每页文字开头 | "[Transition] 基于以上分析，我们来看具体建议。" |
 
-### Notes Writing Guidelines
+### 备注写作指南
 
-- **Conclusion first**: The first sentence of each page's notes is the core takeaway
-- **Conversational data**: 30% → "roughly one-third", 85% → "more than eight out of ten", 2.5x → "two and a half times"
-- **Evidence follows immediately**: After the conclusion, provide 2-3 supporting data points/facts
-- **Professional terminology**: Use terms like "insight", "driver", "key lever" etc.
-- **Key points structure**: `Key points: (1) Core conclusion (2) Supporting data (3) Next steps`
+- **结论先行**：每页备注的第一句话是核心结论
+- **口语化数据**：30% → "约三分之一"，85% → "超过八成"，2.5倍 → "两倍半"
+- **证据紧随其后**：结论后立即提供2-3个支撑数据点/事实
+- **专业术语**：使用"洞察"、"驱动因素"、"关键杠杆"等术语
+- **要点结构**：`关键要点: (1) 核心结论 (2) 支撑数据 (3) 下一步`
 
-### Notes Example
+### 备注示例
 
 ```markdown
 # 03_key_findings
 
-[Transition] Based on our market scan, we have distilled three key findings.
+[Transition] 基于市场扫描，我们提炼出三个关键发现。
 
-First, the primary growth driver is shifting from acquisition to retention.
-[Data] New customer acquisition cost rose nearly 40% year-over-year, yet improved repurchase rates contributed over 60% of revenue growth. [Pause]
+首先，增长的主要驱动力正从获客转向留存。
+[Data] 新客获客成本同比上涨近40%，而改善复购率贡献了超过60%的营收增长。[Pause]
 
-Second, lower-tier market growth significantly outpaces tier-1 and tier-2 cities.
-Third, the 25-35 female user segment has an ARPU 1.8x the overall average.
+其次，下沉市场增速显著高于一二线城市。
+第三，25-35岁女性用户ARPU是整体平均的1.8倍。
 
-Key points: (1) Growth engine shifting from acquisition to retention (2) Lower-tier market opportunity window (3) High-value user persona
-Duration: 2 minutes
+关键要点: (1) 增长引擎从获客转向留存 (2) 下沉市场机会窗口 (3) 高价值用户画像
+时长: 2分钟
 ```
 
 ---
 
-## Self-check Supplement (Consultant-specific)
+## 自我检查补充（咨询特定）
 
-- [ ] Data matches source data — no fabrication
-- [ ] Every data page has a source attribution at the bottom
-- [ ] Page titles are assertion-based, not descriptive
-- [ ] KPI cards have trend arrows and comparison annotations
-- [ ] Chart colors are unified, using monochromatic scheme rather than rainbow
-- [ ] Notes are conclusion-first with conversational data
+- [ ] 数据与来源数据匹配——无编造
+- [ ] 每个数据页底部有来源标注
+- [ ] 页面标题是断言式的，非描述性的
+- [ ] KPI卡片有趋势箭头和对比注释
+- [ ] 图表颜色统一，使用单色系而非彩虹色
+- [ ] 备注结论先行，数据口语化

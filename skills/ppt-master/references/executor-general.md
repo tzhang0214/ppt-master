@@ -1,122 +1,122 @@
-# Executor General — Creative Versatile Style
+# 执行器通用演示 — 创意通用风格
 
-> Common guidelines: executor-base.md. Technical constraints: shared-standards.md.
-
----
-
-## Role Definition
-
-A creative, versatile-style SVG design executor. Suitable for product introductions, training materials, proposal presentations, marketing campaigns, and other **non-consulting** scenarios. Emphasizes visual impact and information engagement, striking a balance between professionalism and approachability.
+> 通用指南：executor-base.md。技术约束：shared-standards.md。
 
 ---
 
-## General-specific Layout Techniques
+## 角色定义
 
-### 1. Flexible and Varied Layouts
-
-The General style is not confined to fixed templates; layouts can be freely chosen based on content:
-
-| Layout | Use Case | Layout Details (1280x720) |
-|--------|----------|--------------------------|
-| Full-image background + text overlay | Covers, emotional pages | `<image>` fills canvas + semi-transparent overlay + centered title |
-| Left-right split (image-text mix) | Feature introductions, comparisons | Left x=40,w=580 / Right x=660,w=580 |
-| Three-column cards | Feature lists, team introductions | x=40,450,860 each w=380, equal-height cards |
-| Top-bottom split | Timelines, process flows | Top area: title+description h=250 / Bottom area: charts+content h=420 |
-| Center-radiating | Core concepts, ecosystem diagrams | Center element + 4-6 surrounding nodes, lines pointing to center |
-| Waterfall / Z-pattern | Storytelling, case studies | Content blocks alternate left-right, guiding the eye in a Z-pattern |
-
-### 2. Visual Rhythm Control
-
-- **Information density alternation**: Follow a data-heavy page with a "breathing page" (large image / quote / transition) to prevent audience fatigue
-- **Visual weight balance**: Dark/large-area elements are "heavy", light/small elements are "light" — balance left-right/top-bottom
-- **Repetition and variation**: Maintain layout consistency within a chapter; vary between chapters to maintain freshness
-
-### 3. Decorative Element Usage
-
-| Element | Usage | Notes |
-|---------|-------|-------|
-| Gradient blocks | Background zones, title backing | Use `<linearGradient>` / `<radialGradient>`, limit to 2-3 colors |
-| Rounded rectangle cards | Content containers, feature modules | `rx="12"` with light shadow (simulate with lighter rect) |
-| Icon accents | List item prefixes, feature markers | Use `data-icon` placeholders, size 32-48px |
-| Numbered circles | Step flows, ranked lists | `<circle>` + centered `<text>`, theme color fill |
-| Divider lines | Content separation | `<line>` or `<rect height="2">`, opacity 0.2-0.3 |
+创意、通用风格的SVG设计执行器。适用于产品介绍、培训材料、提案演示、营销活动等**非咨询**场景。强调视觉冲击和信息参与，在专业性和亲和力之间取得平衡。
 
 ---
 
-## Visual Strategy
+## 通用特定布局技巧
 
-### Color Usage
+### 1. 灵活多变的布局
 
-- **Bold use of theme color**: Covers and chapter pages can use large areas of theme color background
-- **Gradients enhance depth**: Title bars and card backgrounds can use same-hue gradients
-- **Contrast creates focus**: Key numbers/words use accent color, creating contrast with surroundings
-- **Color-mood matching**: Cool tones for tech feel, warm tones for energy, dark tones for gravitas
+通用风格不受固定模板约束；布局可根据内容自由选择：
 
-### Image Handling Strategy
+| 布局 | 用途 | 布局详情 (1280x720) |
+|------|------|---------------------|
+| 全图背景+文字叠加 | 封面、情感页面 | `<image>` 填充画布 + 半透明叠加 + 居中标题 |
+| 左右分栏（图文混排） | 功能介绍、对比 | 左 x=40,w=580 / 右 x=660,w=580 |
+| 三列卡片 | 功能列表、团队介绍 | x=40,450,860 各 w=380，等高卡片 |
+| 上下分割 | 时间线、流程 | 上区：标题+描述 h=250 / 下区：图表+内容 h=420 |
+| 中心辐射 | 核心概念、生态图 | 中心元素 + 4-6个周围节点，线条指向中心 |
+| 瀑布/Z形 | 讲故事、案例研究 | 内容块左右交替，引导视线沿Z形 |
 
-| Scenario | Strategy | SVG Implementation |
-|----------|----------|-------------------|
-| Full-screen background | Image fills + dark gradient overlay | `preserveAspectRatio="xMidYMid slice"` + gradient rect |
-| Portrait image display | Place left/right, maintain original ratio | Control width, height adapts |
-| Multi-image grid | Grid arrangement, uniform sizing | Equal-width equal-height `<image>` matrix |
-| Person photo | Circular crop effect | `<circle>` background + square image overlay (post-processing crops) |
+### 2. 视觉节奏控制
 
-### Typography Hierarchy
+- **信息密度交替**：数据密集页后接"呼吸页"（大图/引言/过渡）防止观众疲劳
+- **视觉重量平衡**：深色/大面积元素为"重"，浅色/小元素为"轻"——左右/上下平衡
+- **重复与变化**：章节内保持布局一致；章节间变化保持新鲜感
+
+### 3. 装饰元素使用
+
+| 元素 | 用法 | 注意事项 |
+|------|------|---------|
+| 渐变色块 | 背景分区、标题底色 | 使用 `<linearGradient>` / `<radialGradient>`，限制2-3种颜色 |
+| 圆角矩形卡片 | 内容容器、功能模块 | `rx="12"` 配浅色阴影（用更浅矩形模拟） |
+| 图标点缀 | 列表项前缀、功能标记 | 使用 `data-icon` 占位符，大小32-48px |
+| 数字圆圈 | 步骤流程、排名列表 | `<circle>` + 居中 `<text>`，主题色填充 |
+| 分割线 | 内容分隔 | `<line>` 或 `<rect height="2">`，透明度0.2-0.3 |
+
+---
+
+## 视觉策略
+
+### 色彩运用
+
+- **大胆使用主题色**：封面和章节页可使用大面积主题色背景
+- **渐变增强层次**：标题栏和卡片背景可使用同色系渐变
+- **对比创造焦点**：关键数字/文字使用强调色，与周围形成对比
+- **色彩情绪匹配**：冷色调营造科技感，暖色调营造活力，深色调营造庄重
+
+### 图片处理策略
+
+| 场景 | 策略 | SVG实现 |
+|------|------|---------|
+| 全屏背景 | 图片填充 + 深色渐变叠加 | `preserveAspectRatio="xMidYMid slice"` + 渐变矩形 |
+| 竖图展示 | 放左/右，保持原始比例 | 控制宽度，高度自适应 |
+| 多图网格 | 网格排列，统一尺寸 | 等宽等高 `<image>` 矩阵 |
+| 人物照片 | 圆形裁剪效果 | `<circle>` 背景 + 方形图片叠加（后处理裁剪） |
+
+### 字号层级
 
 ```
-Title layer   → 28-36px, bold, theme color or white
-Subtitle layer → 20-24px, medium weight, secondary color
-Body layer    → 16-18px, regular, dark gray
-Annotation layer → 12-14px, light gray, bottom-aligned
+标题层   → 28-36px，加粗，主题色或白色
+副标题层 → 20-24px，中等字重，次要颜色
+正文层   → 16-18px，常规，深灰色
+注释层   → 12-14px，浅灰色，底部对齐
 ```
 
 ---
 
-## Speaker Notes Style
+## 演讲备注风格
 
-### Narrative Tone
+### 叙事语调
 
-General style speaker notes use **conversational narration** — like talking with the audience, not reading a report. Natural tone with rhythm, using rhetorical devices where appropriate.
+通用风格演讲备注使用**口语化叙述**——像与观众对话，而非读报告。自然有节奏，适时使用修辞手法。
 
-### Stage Direction Markers
+### 舞台指示标记
 
-| Marker | Purpose | Example |
-|--------|---------|---------|
-| `[Pause]` | Silence after key reveal, letting the audience absorb | "What does this number mean? [Pause] It means 1 in every 3 users..." |
-| `[Interactive]` | Ask questions or guide audience participation | "[Interactive] How many of you have used this feature?" |
-| `[Transition]` | Bridge from previous page, must be at start of each page's text | "[Transition] Now that we understand the context, let's see how it works." |
+| 标记 | 用途 | 示例 |
+|------|------|------|
+| `[Pause]` | 关键揭示后的沉默，让观众吸收 | "这个数字意味着什么？[Pause] 意味着每3个用户中就有1个..." |
+| `[Interactive]` | 提问或引导观众参与 | "[Interactive] 你们中有多少人使用过这个功能？" |
+| `[Transition]` | 衔接上一页，必须在每页文字开头 | "[Transition] 了解了背景之后，你们可能会想：它是怎么工作的？" |
 
-### Notes Writing Guidelines
+### 备注写作指南
 
-- **Tell stories**: Use "scenario-conflict-resolution" structure for each page's narrative
-- **Use metaphors**: Make abstract concepts tangible ("It's like adding a turbocharger to the system")
-- **Create suspense**: Pose questions at the right time, answer on the next page
-- **Conversational data**: 30% → "nearly one-third", 2.5x → "more than doubled"
-- **Key points structure**: `Key points: (1) Core message (2) Supporting evidence (3) Call to action`
+- **讲故事**：每页叙事使用"场景-冲突-解决"结构
+- **用比喻**：让抽象概念具象化（"就像给系统加了一个涡轮增压器"）
+- **制造悬念**：适时抛出问题，在下一页解答
+- **口语化数据**：30% → "近三分之一"，2.5倍 → "超过两倍"
+- **要点结构**：`关键要点: (1) 核心信息 (2) 支撑证据 (3) 行动号召`
 
-### Notes Example
+### 备注示例
 
 ```markdown
 # 03_key_advantages
 
-[Transition] Having covered the market landscape, you might be wondering: where is our opportunity?
+[Transition] 了解了市场格局之后，你们可能会想：我们的机会在哪里？
 
-Our core advantages can be summed up in three words: Fast, Accurate, Efficient.
-Fast — deployment time cut from 3 months to 2 weeks; [Pause]
-Accurate — recognition accuracy at 97.3%, far exceeding the industry average of 82%;
-Efficient — overall costs reduced by nearly one-third.
+我们的核心优势可以用三个词概括：快、准、稳。
+快——部署时间从3个月缩短到2周；[Pause]
+准——识别准确率达97.3%，远超行业平均82%；
+稳——整体成本降低近三分之一。
 
-[Interactive] If you were the decision-maker, which of these three numbers would impress you most?
+[Interactive] 如果你是决策者，这三个数字中哪个最打动你？
 
-Key points: (1) Three differentiating advantages (2) Quantitative data support (3) Prompt for reflection
-Duration: 2 minutes
+关键要点: (1) 三大差异化优势 (2) 定量数据支撑 (3) 引导反思
+时长: 2分钟
 ```
 
 ---
 
-## Self-check Supplement (General-specific)
+## 自我检查补充（通用特定）
 
-- [ ] Visual rhythm is reasonable: data-dense pages alternate with breathing pages
-- [ ] Decorative elements are moderate: serving content, not overshadowing it
-- [ ] Image-text ratio is appropriate: not just text walls, visual highlights present
-- [ ] Notes are conversational: reads like speaking, not reading a script
+- [ ] 视觉节奏合理：数据密集页与呼吸页交替
+- [ ] 装饰元素适度：服务内容，不喧宾夺主
+- [ ] 图文比例恰当：不是文字墙，有视觉亮点
+- [ ] 备注口语化：读起来像说话，不像念稿

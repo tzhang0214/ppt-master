@@ -1,10 +1,10 @@
-# SVG Pipeline Tools
+# SVG流水线工具
 
-These tools cover post-processing, SVG validation, speaker notes, and PPTX export.
+这些工具涵盖后处理、SVG验证、演讲备注和PPTX导出。
 
-## Recommended Pipeline
+## 推荐流水线
 
-Run these steps in order:
+按顺序运行这些步骤：
 
 ```bash
 python3 scripts/total_md_split.py <project_path>
@@ -14,9 +14,9 @@ python3 scripts/svg_to_pptx.py <project_path> -s final
 
 ## `finalize_svg.py`
 
-Unified post-processing entry point. This is the preferred way to run SVG cleanup.
+统一后处理入口。这是运行SVG清理的首选方式。
 
-It aggregates:
+它聚合了：
 - `embed_icons.py`
 - `crop_images.py`
 - `fix_image_aspect.py`
@@ -24,17 +24,17 @@ It aggregates:
 - `flatten_tspan.py`
 - `svg_rect_to_path.py`
 
-Typical usage:
+典型用法：
 
 ```bash
 python3 scripts/finalize_svg.py <project_path>
 ```
 
-Use standalone sub-tools only when you need advanced debugging or one-off fixes.
+仅在需要高级调试或一次性修复时才使用独立子工具。
 
 ## `svg_to_pptx.py`
 
-Convert project SVGs into PPTX.
+将项目SVG转换为PPTX。
 
 ```bash
 python3 scripts/svg_to_pptx.py <project_path> -s final
@@ -45,12 +45,12 @@ python3 scripts/svg_to_pptx.py <project_path> -t none
 python3 scripts/svg_to_pptx.py <project_path> -s final --auto-advance 3
 ```
 
-Behavior:
-- Default output: native editable PPTX + SVG reference PPTX
-- Recommended source directory: `svg_final/`
-- Speaker notes are embedded automatically unless `--no-notes` is used
+行为：
+- 默认输出：原生可编辑PPTX + SVG参考PPTX
+- 推荐源目录：`svg_final/`
+- 默认自动嵌入演讲备注，除非使用 `--no-notes`
 
-Dependency:
+依赖：
 
 ```bash
 pip install python-pptx
@@ -58,7 +58,7 @@ pip install python-pptx
 
 ## `total_md_split.py`
 
-Split `total.md` into per-slide note files.
+将 `total.md` 拆分为每页备注文件。
 
 ```bash
 python3 scripts/total_md_split.py <project_path>
@@ -66,14 +66,14 @@ python3 scripts/total_md_split.py <project_path> -o <output_directory>
 python3 scripts/total_md_split.py <project_path> -q
 ```
 
-Requirements:
-- Each section begins with `# `
-- Heading text matches the SVG filename
-- Sections are separated by `---`
+要求：
+- 每个部分以 `# ` 开头
+- 标题文字与SVG文件名匹配
+- 部分之间用 `---` 分隔
 
 ## `svg_quality_checker.py`
 
-Validate SVG technical compliance.
+验证SVG技术合规性。
 
 ```bash
 python3 scripts/svg_quality_checker.py examples/project/svg_output/01_cover.svg
@@ -84,17 +84,17 @@ python3 scripts/svg_quality_checker.py --all examples
 python3 scripts/svg_quality_checker.py examples/project --export
 ```
 
-Checks include:
+检查包括：
 - `viewBox`
-- banned elements
-- width/height consistency
-- line-break structure
+- 禁止元素
+- 宽度/高度一致性
+- 换行结构
 
 ## `svg_position_calculator.py`
 
-Analyze or pre-calculate chart coordinates.
+分析或预计算图表坐标。
 
-Common commands:
+常用命令：
 
 ```bash
 python3 scripts/svg_position_calculator.py analyze <svg_file>
@@ -104,9 +104,9 @@ python3 scripts/svg_position_calculator.py calc pie --data "A:35,B:25,C:20"
 python3 scripts/svg_position_calculator.py from-json config.json
 ```
 
-Use this when chart geometry needs to be verified before or after AI generation.
+AI生成前后验证图表几何时使用此工具。
 
-## Advanced Standalone Tools
+## 高级独立工具
 
 ### `flatten_tspan.py`
 
@@ -123,7 +123,7 @@ python3 scripts/svg_finalize/svg_rect_to_path.py <project_path> -s final
 python3 scripts/svg_finalize/svg_rect_to_path.py path/to/file.svg
 ```
 
-Use when rounded corners must survive PowerPoint shape conversion.
+当圆角必须保留以通过PowerPoint形状转换时使用。
 
 ### `fix_image_aspect.py`
 
@@ -133,7 +133,7 @@ python3 scripts/svg_finalize/fix_image_aspect.py 01_cover.svg 02_toc.svg
 python3 scripts/svg_finalize/fix_image_aspect.py --dry-run path/to/slide.svg
 ```
 
-Use when embedded images stretch after PowerPoint shape conversion.
+当嵌入图片在PowerPoint形状转换后拉伸时使用。
 
 ### `embed_icons.py`
 
@@ -143,19 +143,19 @@ python3 scripts/svg_finalize/embed_icons.py svg_output/*.svg
 python3 scripts/svg_finalize/embed_icons.py --dry-run svg_output/*.svg
 ```
 
-Use for manual icon embedding checks outside `finalize_svg.py`.
+在 `finalize_svg.py` 之外手动检查图标嵌入时使用。
 
-## PPT Compatibility Rules
+## PPT兼容性规则
 
-Use PowerPoint-safe transparency syntax:
+使用PowerPoint安全的透明度语法：
 
-| Avoid | Use instead |
-|------|-------------|
+| 避免 | 使用 |
+|------|------|
 | `fill=\"rgba(...)\"` | `fill=\"#hex\"` + `fill-opacity` |
-| `<g opacity=\"...\">` | Set opacity on each child |
-| `<image opacity=\"...\">` | Overlay with a mask layer |
+| `<g opacity=\"...\">` | 在每个子元素上设置透明度 |
+| `<image opacity=\"...\">` | 用遮罩层叠加 |
 
-PowerPoint also has trouble with:
-- marker-based arrows
-- unsupported filters
-- direct SVG features not mapped to DrawingML
+PowerPoint还有以下问题：
+- 基于marker的箭头
+- 不支持的滤镜
+- 未映射到DrawingML的直接SVG特性

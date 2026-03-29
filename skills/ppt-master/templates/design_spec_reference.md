@@ -1,282 +1,282 @@
-# {project_name} - Design Spec
+# {项目名称} - 设计规范
 
-## I. Project Information
+## I. 项目信息
 
-| Item | Value |
-| ---- | ----- |
-| **Project Name** | {project_name} |
-| **Canvas Format** | {canvas_info['name']} ({canvas_info['dimensions']}) |
-| **Page Count** | [Filled by Strategist] |
-| **Design Style** | {design_style} |
-| **Target Audience** | [Filled by Strategist] |
-| **Use Case** | [Filled by Strategist] |
-| **Created Date** | {date_str} |
-
----
-
-## II. Canvas Specification
-
-| Property | Value |
-| -------- | ----- |
-| **Format** | {canvas_info['name']} |
-| **Dimensions** | {canvas_info['dimensions']} |
-| **viewBox** | `{canvas_info['viewbox']}` |
-| **Margins** | [Recommended by Strategist, e.g., left/right 60px, top/bottom 50px] |
-| **Content Area** | [Calculated from canvas] |
+| 项目 | 值 |
+|------|-----|
+| **项目名称** | {项目名称} |
+| **画布格式** | {画布信息['name']} ({画布信息['dimensions']}) |
+| **页面数量** | [由策略师填写] |
+| **设计风格** | {设计风格} |
+| **目标受众** | [由策略师填写] |
+| **使用场景** | [由策略师填写] |
+| **创建日期** | {日期字符串} |
 
 ---
 
-## III. Visual Theme
+## II. 画布规格
 
-### Theme Style
+| 属性 | 值 |
+|------|-----|
+| **格式** | {画布信息['name']} |
+| **尺寸** | {画布信息['dimensions']} |
+| **viewBox** | `{画布信息['viewbox']}` |
+| **边距** | [策略师建议，如左右60px，上下50px] |
+| **内容区域** | [根据画布计算] |
 
-- **Style**: {design_style}
-- **Theme**: [Light theme / Dark theme]
-- **Tone**: [Filled by Strategist, e.g., tech, professional, modern, innovative]
+---
 
-### Color Scheme
+## III. 视觉主题
 
-> Strategist should determine specific color values based on project content, industry, and brand colors
+### 主题风格
 
-| Role | HEX | Purpose |
-| ---- | --- | ------- |
-| **Background** | `#......` | Page background (light theme typically white; dark theme dark gray/navy) |
-| **Secondary bg** | `#......` | Card background, section background |
-| **Primary** | `#......` | Title decorations, key sections, icons |
-| **Accent** | `#......` | Data highlights, key information, links |
-| **Secondary accent** | `#......` | Secondary emphasis, gradient transitions |
-| **Body text** | `#......` | Main body text (dark theme uses light text) |
-| **Secondary text** | `#......` | Captions, annotations |
-| **Tertiary text** | `#......` | Supplementary info, footers |
-| **Border/divider** | `#......` | Card borders, divider lines |
-| **Success** | `#......` | Positive indicators (green family) |
-| **Warning** | `#......` | Issue markers (red family) |
+- **风格**: {设计风格}
+- **主题**: [浅色主题 / 深色主题]
+- **色调**: [策略师填写，如科技、专业、现代、创新]
 
-> **Reference**: Industry colors in `references/strategist.md` or `scripts/config.py` under `INDUSTRY_COLORS`
+### 配色方案
 
-### Gradient Scheme (if needed, using SVG syntax)
+> 策略师应根据项目内容、行业和品牌颜色确定具体色值
+
+| 角色 | HEX | 用途 |
+|------| --- | ------|
+| **背景色** | `#......` | 页面背景（浅色主题通常为白色；深色主题为深灰/藏青） |
+| **次要背景** | `#......` | 卡片背景、区域背景 |
+| **主色** | `#......` | 标题装饰、关键区域、图标 |
+| **强调色** | `#......` | 数据高亮、关键信息、链接 |
+| **次要强调** | `#......` | 次要强调、渐变过渡 |
+| **正文色** | `#......` | 主正文（深色主题使用浅色文字） |
+| **次要文字** | `#......` | 注释、标注 |
+| **三级文字** | `#......` | 补充信息、页脚 |
+| **边框/分割线** | `#......` | 卡片边框、分割线 |
+| **成功色** | `#......` | 正向指标（绿色系） |
+| **警告色** | `#......` | 问题标记（红色系） |
+
+> **参考**: `references/strategist.md` 或 `scripts/config.py` 中 `INDUSTRY_COLORS` 的行业配色
+
+### 渐变方案（需要时，使用SVG语法）
 
 ```xml
-<!-- Title gradient -->
+<!-- 标题渐变 -->
 <linearGradient id="titleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-  <stop offset="0%" stop-color="#[primary]"/>
-  <stop offset="100%" stop-color="#[secondary accent]"/>
+  <stop offset="0%" stop-color="#[主色]"/>
+  <stop offset="100%" stop-color="#[次要强调]"/>
 </linearGradient>
 
-<!-- Background decorative gradient (note: rgba forbidden, use stop-opacity) -->
+<!-- 背景装饰渐变（注意：禁止rgba，使用stop-opacity） -->
 <radialGradient id="bgDecor" cx="80%" cy="20%" r="50%">
-  <stop offset="0%" stop-color="#[primary]" stop-opacity="0.15"/>
-  <stop offset="100%" stop-color="#[primary]" stop-opacity="0"/>
+  <stop offset="0%" stop-color="#[主色]" stop-opacity="0.15"/>
+  <stop offset="100%" stop-color="#[主色]" stop-opacity="0"/>
 </radialGradient>
 ```
 
 ---
 
-## IV. Typography System
+## IV. 字体系统
 
-### Font Plan
+### 字体方案
 
-> Strategist should select a font preset based on content characteristics, or customize the font combination
-> Preset descriptions: P1=Modern business/tech | P2=Government docs | P3=Culture/arts | P4=Traditional/conservative | P5=English-primary
+> 策略师应根据内容特点选择字体预设，或自定义字体组合
+> 预设说明：P1=现代商务/科技 | P2=政府文档 | P3=文化/艺术 | P4=传统/保守 | P5=英文为主
 
-**Recommended preset**: [Fill in preset code]
+**推荐预设**: [填写预设代码]
 
-| Role | Chinese | English | Fallback |
-| ---- | ------- | ------- | -------- |
-| **Title** | [font name] | [font name] | [font name] |
-| **Body** | [font name] | [font name] | [font name] |
-| **Code** | - | Consolas | Monaco |
-| **Emphasis** | [font name] | [font name] | [font name] |
+| 角色 | 中文 | 英文 | 备选 |
+|------|------|------|------|
+| **标题** | [字体名] | [字体名] | [字体名] |
+| **正文** | [字体名] | [字体名] | [字体名] |
+| **代码** | - | Consolas | Monaco |
+| **强调** | [字体名] | [字体名] | [字体名] |
 
-**Font stack**: `[Fill in CSS font-family string]`
+**字体栈**: `[填写CSS font-family字符串]`
 
-### Font Size Hierarchy
+### 字体层级
 
-> **Design principle**: Use body font size as baseline (1x), derive other levels proportionally
-> **Unit convention**: Use px uniformly (SVG native unit) to avoid pt/px conversion errors
-> **Selection principle**: Font size is based on **content density**, not design style
+> **设计原则**: 以正文字号为基准（1x），按比例推导其他级别
+> **单位规范**: 统一使用px（SVG原生单位），避免pt/px换算错误
+> **选择原则**: 字号基于**内容密度**，而非设计风格
 
-**Baseline**: Body font size = [fill in]px (choose 18-24px based on content density)
+**基准**: 正文字号 = [填写]px（根据内容密度选择18-24px）
 
-| Purpose | Ratio | 24px baseline (relaxed) | 18px baseline (dense) | Weight |
-| ------- | ----- | ---------------------- | -------------------- | ------ |
-| Cover title | 2.5-3x | 60-72px | 45-54px | Bold |
-| Chapter title | 2-2.5x | 48-60px | 36-45px | Bold |
-| Content title | 1.5-2x | 36-48px | 27-36px | Bold |
-| Subtitle | 1.2-1.5x | 29-36px | 22-27px | SemiBold |
-| **Body content** | **1x** | **24px** | **18px** | Regular |
-| Annotation | 0.75-0.85x | 18-20px | 14-15px | Regular |
-| Page number/date | 0.55-0.65x | 13-16px | 10-12px | Regular |
+| 用途 | 比例 | 24px基准（宽松） | 18px基准（紧凑） | 字重 |
+|------|------|-------------------|-----------------|------|
+| 封面标题 | 2.5-3x | 60-72px | 45-54px | Bold |
+| 章节标题 | 2-2.5x | 48-60px | 36-45px | Bold |
+| 内容标题 | 1.5-2x | 36-48px | 27-36px | Bold |
+| 副标题 | 1.2-1.5x | 29-36px | 22-27px | SemiBold |
+| **正文内容** | **1x** | **24px** | **18px** | Regular |
+| 注释 | 0.75-0.85x | 18-20px | 14-15px | Regular |
+| 页码/日期 | 0.55-0.65x | 13-16px | 10-12px | Regular |
 
-> **Tip**: Dense content (6+ points per page) use 18px; relaxed content (3-5 points per page) use 24px
-
----
-
-## V. Layout Principles
-
-### Page Structure
-
-- **Header area**: [Height and content description]
-- **Content area**: [Height and content description]
-- **Footer area**: [Height and content description]
-
-### Common Layout Modes
-
-| Mode | Suitable Scenarios |
-| ---- | ----------------- |
-| **Single column centered** | Covers, conclusions, key points |
-| **Left-right split (5:5)** | Comparisons, dual concepts |
-| **Left-right split (4:6)** | Image-text mix |
-| **Top-bottom split** | Processes, timelines |
-| **Three/four column cards** | Feature lists, team introductions |
-| **Matrix grid** | Comparative analysis, classifications |
-
-### Spacing Specification
-
-> Strategist may adjust based on project needs
-
-| Element | Recommended Range | Current Project |
-| ------- | ---------------- | --------------- |
-| Card gap | 20-32px | [fill in] |
-| Content block gap | 24-40px | [fill in] |
-| Card padding | 20-32px | [fill in] |
-| Card border radius | 8-16px | [fill in] |
-| Icon-text gap | 8-16px | [fill in] |
-| Single-row card height | 530-600px | [fill in] |
-| Double-row card height | 265-295px each | [fill in] |
-| Three-column card width | 360-380px each | [fill in] |
+> **提示**: 紧凑内容（每页6+要点）使用18px；宽松内容（每页3-5要点）使用24px
 
 ---
 
-## VI. Icon Usage Specification
+## V. 布局原则
 
-### Source
+### 页面结构
 
-- **Built-in icon library**: `templates/icons/` (640+ icons)
-- **Usage method**: Placeholder format `{{icon:category/icon-name}}`
+- **头部区域**: [高度和内容描述]
+- **内容区域**: [高度和内容描述]
+- **底部区域**: [高度和内容描述]
 
-### Recommended Icon List (fill as needed)
+### 常用布局模式
 
-| Purpose | Icon Path | Page |
-| ------- | --------- | ---- |
-| [example] | `{{icon:interface/check-circle}}` | Slide XX |
+| 模式 | 适用场景 |
+|------|---------|
+| **单列居中** | 封面、结论、要点 |
+| **左右分栏 (5:5)** | 对比、双概念 |
+| **左右分栏 (4:6)** | 图文混排 |
+| **上下分割** | 流程、时间线 |
+| **三/四列卡片** | 功能列表、团队介绍 |
+| **矩阵网格** | 对比分析、分类 |
 
----
+### 间距规范
 
-## VII. Chart Reference List (if needed)
+> 策略师可根据项目需求调整
 
-> When the presentation includes data visualization, Strategist selects chart types from `templates/charts/charts_index.json` and lists them here for the Executor to reference.
-
-| Chart Type | Reference Template | Used In |
-| ---------- | ------------------ | ------- |
-| [e.g. grouped_bar_chart] | `templates/charts/grouped_bar_chart.svg` | Slide 05 |
-
----
-
-## VIII. Image Resource List (if needed)
-
-| Filename | Dimensions | Ratio | Purpose | Type | Status | Generation Description |
-| -------- | --------- | ----- | ------- | ---- | ------ | --------------------- |
-| cover_bg.png | {canvas_info['dimensions']} | [ratio] | Cover background | [Background/Photography/Illustration/Diagram/Decorative] | [Pending/Existing/Placeholder] | [AI generation prompt] |
-
-**Status descriptions**:
-
-- **Pending** - Needs AI generation, provide detailed description
-- **Existing** - User already has image, place in `images/`
-- **Placeholder** - Not yet processed, use dashed border placeholder in SVG
-
-**Type descriptions** (used by Image_Generator for prompt strategy selection):
-
-- **Background** - Full-page background for covers/chapters, reserve text area
-- **Photography** - Real scenes, people, products, architecture
-- **Illustration** - Flat design, vector style, cartoon, concept diagrams
-- **Diagram** - Flowcharts, architecture diagrams, concept maps
-- **Decorative** - Partial decorations, textures, borders, dividers
+| 元素 | 推荐范围 | 当前项目 |
+|------|---------|---------|
+| 卡片间距 | 20-32px | [填写] |
+| 内容块间距 | 24-40px | [填写] |
+| 卡片内边距 | 20-32px | [填写] |
+| 卡片圆角 | 8-16px | [填写] |
+| 图标文字间距 | 8-16px | [填写] |
+| 单行卡片高度 | 530-600px | [填写] |
+| 双行卡片高度 | 每行265-295px | [填写] |
+| 三列卡片宽度 | 每列360-380px | [填写] |
 
 ---
 
-## IX. Content Outline
+## VI. 图标使用规范
 
-### Part 1: [Chapter Name]
+### 来源
 
-#### Slide 01 - Cover
+- **内置图标库**: `templates/icons/` (640+ 图标)
+- **使用方法**: 占位符格式 `{{icon:category/icon-name}}`
 
-- **Layout**: Full-screen background image + centered title
-- **Title**: [Main title]
-- **Subtitle**: [Subtitle]
-- **Info**: [Author / Date / Organization]
+### 推荐图标列表（按需填写）
 
-#### Slide 02 - [Page Name]
-
-- **Layout**: [Choose layout mode]
-- **Title**: [Page title]
-- **Chart**: [chart_type] (see VII. Chart Reference List)
-- **Content**:
-  - [Point 1]
-  - [Point 2]
-  - [Point 3]
-
-> **Chart field**: Only add when the page includes data visualization. Chart type must be listed in section VII.
+| 用途 | 图标路径 | 页码 |
+|------|---------|------|
+| [示例] | `{{icon:interface/check-circle}}` | 第XX页 |
 
 ---
 
-[Strategist continues adding more pages based on source document content and page count planning...]
+## VII. 图表参考列表（需要时）
+
+> 当演示包含数据可视化时，策略师从 `templates/charts/charts_index.json` 选择图表类型，并在此列出供执行器参考。
+
+| 图表类型 | 参考模板 | 使用位置 |
+|---------|---------|---------|
+| [如 grouped_bar_chart] | `templates/charts/grouped_bar_chart.svg` | 第5页 |
 
 ---
 
-## X. Speaker Notes Requirements
+## VIII. 图片资源列表（需要时）
 
-Generate corresponding speaker note files for each page, saved to the `notes/` directory:
+| 文件名 | 尺寸 | 比例 | 用途 | 类型 | 状态 | 生成描述 |
+|--------|------|------|------|------|------|---------|
+| cover_bg.png | {画布信息['dimensions']} | [比例] | 封面背景 | [Background/Photography/Illustration/Diagram/Decorative] | [Pending/Existing/Placeholder] | [AI生成提示词] |
 
-- **File naming**: Match SVG names, e.g., `01_cover.md`
-- **Content includes**: Script key points, timing cues, transition phrases
+**状态说明**:
 
----
+- **Pending** - 需要AI生成，提供详细描述
+- **Existing** - 用户已有图片，放入 `images/`
+- **Placeholder** - 尚未处理，在SVG中使用虚线边框占位符
 
-## XI. Technical Constraints Reminder
+**类型说明**（供图片生成器选择提示策略）:
 
-### SVG Generation Must Follow:
-
-1. viewBox: `{canvas_info['viewbox']}`
-2. Background uses `<rect>` elements
-3. Text wrapping uses `<tspan>` (`<foreignObject>` FORBIDDEN)
-4. Transparency uses `fill-opacity` / `stroke-opacity`; `rgba()` FORBIDDEN
-5. FORBIDDEN: `clipPath`, `mask`, `<style>`, `class`, `foreignObject`
-6. FORBIDDEN: `textPath`, `animate*`, `script`, `marker`/`marker-end`
-7. Arrows use `<polygon>` triangles instead of `<marker>`
-
-### PPT Compatibility Rules:
-
-- `<g opacity="...">` FORBIDDEN (group opacity); set on each child element individually
-- Image transparency uses overlay mask layer (`<rect fill="bg-color" opacity="0.x"/>`)
-- Inline styles only; external CSS and `@font-face` FORBIDDEN
+- **Background** - 封面/章节页的全页背景；保留文字区域
+- **Photography** - 真实场景、人物、产品、建筑
+- **Illustration** - 扁平设计、矢量风格、卡通、概念图
+- **Diagram** - 流程图、架构图、概念关系图
+- **Decorative** - 局部装饰、纹理、边框、分割线
 
 ---
 
-## XII. Design Checklist
+## IX. 内容大纲
 
-### Pre-generation
+### 第一部分: [章节名称]
 
-- [ ] Content fits page capacity
-- [ ] Layout mode selected correctly
-- [ ] Colors used semantically
+#### 第1页 - 封面
 
-### Post-generation
+- **布局**: 全屏背景图 + 居中标题
+- **标题**: [主标题]
+- **副标题**: [副标题]
+- **信息**: [作者 / 日期 / 组织]
 
-- [ ] viewBox = `{canvas_info['viewbox']}`
-- [ ] No `<foreignObject>` elements
-- [ ] All text readable (>=14px)
-- [ ] Content within safe area
-- [ ] All elements aligned to grid
-- [ ] Same elements maintain consistent style
-- [ ] Colors conform to spec
-- [ ] CRAP four-principle check passed
+#### 第2页 - [页面名称]
+
+- **布局**: [选择布局模式]
+- **标题**: [页面标题]
+- **图表**: [图表类型]（见VII. 图表参考列表）
+- **内容**:
+  - [要点1]
+  - [要点2]
+  - [要点3]
+
+> **图表字段**: 仅在页面包含数据可视化时添加。图表类型必须在第七部分列出。
 
 ---
 
-## XIII. Next Steps
+[策略师根据源文档内容和页数规划继续添加更多页面...]
 
-1. ✅ Design spec complete
-2. **Next step**: [Choose based on image approach]
-   - No AI images → Invoke **Executor** role to generate SVGs
-   - Has AI images → Invoke **Image_Generator** role, then invoke Executor after completion
+---
+
+## X. 演讲备注要求
+
+为每个页面生成对应的演讲备注文件，保存到 `notes/` 目录：
+
+- **文件命名**: 与SVG名称匹配，如 `01_cover.md`
+- **内容包含**: 演讲要点、时间提示、过渡语
+
+---
+
+## XI. 技术约束提醒
+
+### SVG生成必须遵循：
+
+1. viewBox: `{画布信息['viewbox']}`
+2. 背景使用 `<rect>` 元素
+3. 文字换行使用 `<tspan>`（**禁止 `<foreignObject>`**）
+4. 透明度使用 `fill-opacity` / `stroke-opacity`；**禁止 `rgba()`**
+5. **禁止**: `clipPath`、`mask`、`<style>`、`class`、`foreignObject`
+6. **禁止**: `textPath`、`animate*`、`script`、`marker`/`marker-end`
+7. 箭头使用 `<polygon>` 三角形代替 `<marker>`
+
+### PPT兼容性规则：
+
+- **禁止 `<g opacity="...">`**（组透明度）；在每个子元素上单独设置
+- 图片透明度使用叠加遮罩层（`<rect fill="背景色" opacity="0.x"/>`）
+- 仅使用内联样式；**禁止**外部CSS和`@font-face`
+
+---
+
+## XII. 设计检查清单
+
+### 生成前
+
+- [ ] 内容符合页面容量
+- [ ] 布局模式选择正确
+- [ ] 颜色使用语义化
+
+### 生成后
+
+- [ ] viewBox = `{画布信息['viewbox']}`
+- [ ] 无 `<foreignObject>` 元素
+- [ ] 所有文字可读（>=14px）
+- [ ] 内容在安全区域内
+- [ ] 所有元素对齐网格
+- [ ] 相同元素保持风格一致
+- [ ] 颜色符合规范
+- [ ] CRAP四原则检查通过
+
+---
+
+## XIII. 下一步
+
+1. ✅ 设计规范完成
+2. **下一步**: [根据图片方案选择]
+   - 无AI图片 → 调用**执行器**角色生成SVG
+   - 有AI图片 → 调用**图片生成器**角色，完成后调用执行器

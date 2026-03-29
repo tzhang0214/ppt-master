@@ -1,42 +1,42 @@
-# Troubleshooting
+# 故障排除
 
-## Validation Failed
+## 验证失败
 
-1. Run:
+1. 运行：
 
 ```bash
 python3 scripts/project_manager.py validate <project_path>
 ```
 
-2. Fix missing files or invalid directories reported by the validator.
-3. Re-run validation before post-processing or export.
+2. 修复验证器报告的缺失文件或无效目录。
+3. 后处理或导出前重新运行验证。
 
-## SVG Preview Looks Wrong
+## SVG预览有问题
 
-1. Check the file path and filename.
-2. Confirm naming conventions are consistent.
-3. Preview via a local server if browser file loading is inconsistent:
+1. 检查文件路径和文件名。
+2. 确认命名约定一致。
+3. 如浏览器文件加载不一致，通过本地服务器预览：
 
 ```bash
 python3 -m http.server --directory <svg_output_path> 8000
 ```
 
-## Speaker Notes Do Not Split
+## 演讲备注未拆分
 
-Check `total.md`:
-- headings must start with `# `
-- heading text must match SVG filenames
-- sections must be separated by `---`
+检查 `total.md`：
+- 标题必须以 `# ` 开头
+- 标题文字必须与SVG文件名匹配
+- 部分之间必须用 `---` 分隔
 
-Then rerun:
+然后重新运行：
 
 ```bash
 python3 scripts/total_md_split.py <project_path>
 ```
 
-## PPT Export Quality Issues
+## PPT导出质量问题
 
-Preferred sequence:
+首选顺序：
 
 ```bash
 python3 scripts/total_md_split.py <project_path>
@@ -44,19 +44,19 @@ python3 scripts/finalize_svg.py <project_path>
 python3 scripts/svg_to_pptx.py <project_path> -s final
 ```
 
-Do not export directly from `svg_output/` when `svg_final/` exists.
+当 `svg_final/` 存在时不要直接从 `svg_output/` 导出。
 
-## Dependency Checklist
+## 依赖检查清单
 
-Most tools use the standard library. Install extra dependencies only when needed:
+大多数工具使用标准库。仅在需要时安装额外依赖：
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Important optional packages:
-- `python-pptx` for PPTX export
-- `Pillow` for image utilities
-- `numpy` for watermark removal
-- `PyMuPDF` for PDF conversion
-- `google-genai` / `openai` for image generation backends
+重要的可选包：
+- `python-pptx` 用于PPTX导出
+- `Pillow` 用于图片工具
+- `numpy` 用于水印去除
+- `PyMuPDF` 用于PDF转换
+- `google-genai` / `openai` 用于图片生成后端

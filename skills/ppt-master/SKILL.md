@@ -1,136 +1,134 @@
 ---
 name: ppt-master
 description: >
-  AI-driven multi-format SVG content generation system. Converts source documents
-  (PDF/DOCX/URL/Markdown) into high-quality SVG pages and exports to PPTX through
-  multi-role collaboration. Use when user asks to "create PPT", "make presentation",
-  "生成PPT", "做PPT", "制作演示文稿", or mentions "ppt-master".
+  AI驱动的多格式SVG内容生成系统。将源文档（PDF/DOCX/URL/Markdown）通过多角色协作转换为高质量SVG页面，
+  并导出为PPTX格式。当用户要求"创建PPT"、"制作PPT"、"生成演示文稿"或提到"ppt-master"时使用此技能。
 ---
 
-# PPT Master Skill
+# PPT Master 技能指南
 
-> AI-driven multi-format SVG content generation system. Converts source documents into high-quality SVG pages through multi-role collaboration and exports to PPTX.
+> AI驱动的多格式SVG内容生成系统。通过多角色协作将源文档转换为高质量SVG页面，并导出为PPTX格式。
 
-**Core Pipeline**: `Source Document → Create Project → Template Option → Strategist → [Image_Generator] → Executor → Post-processing → Export`
+**核心流程**：`源文档 → 创建项目 → 选择模板 → 策略师 → [图片生成器] → 执行器 → 后处理 → 导出`
 
 > [!CAUTION]
-> ## 🚨 Global Execution Discipline (MANDATORY)
+> ## 🚨 全局执行纪律（强制执行）
 >
-> **This workflow is a strict serial pipeline. The following rules have the highest priority — violating any one of them constitutes execution failure:**
+> **此工作流程为严格串行管道。以下规则具有最高优先级——违反任何一条即视为执行失败：**
 >
-> 1. **SERIAL EXECUTION** — Steps MUST be executed in order; the output of each step is the input for the next. Non-BLOCKING adjacent steps may proceed continuously once prerequisites are met, without waiting for the user to say "continue"
-> 2. **BLOCKING = HARD STOP** — Steps marked ⛔ BLOCKING require a full stop; the AI MUST wait for an explicit user response before proceeding and MUST NOT make any decisions on behalf of the user
-> 3. **NO CROSS-PHASE BUNDLING** — Cross-phase bundling is FORBIDDEN. (Note: the Eight Confirmations in Step 4 are ⛔ BLOCKING — the AI MUST present recommendations and wait for explicit user confirmation before proceeding. Once the user confirms, all subsequent non-BLOCKING steps — design spec output, SVG generation, speaker notes, and post-processing — may proceed automatically without further user confirmation)
-> 4. **GATE BEFORE ENTRY** — Each Step has prerequisites (🚧 GATE) listed at the top; these MUST be verified before starting that Step
-> 5. **NO SPECULATIVE EXECUTION** — "Pre-preparing" content for subsequent Steps is FORBIDDEN (e.g., writing SVG code during the Strategist phase)
+> 1. **串行执行** — 各步骤必须按顺序执行；每个步骤的输出是下一步的输入。满足前置条件的非阻塞相邻步骤可连续执行，无需等待用户说"继续"
+> 2. **阻塞 = 硬性停止** — 标记为 ⛔ 阻塞的步骤需要完全停止；AI 必须等待用户明确响应后才能继续，不得代为决策
+> 3. **禁止跨阶段打包** — 禁止跨阶段打包。（注意：第4步中的八项确认 ⛔ 阻塞——AI 必须呈现建议并等待用户明确确认后才能继续。一旦用户确认，所有后续非阻塞步骤——设计规范输出、SVG生成、演讲备注和后处理——可自动执行，无需进一步用户确认）
+> 4. **入口前先验证** — 每个步骤都有列在顶部的前置条件（🚧 门槛）；在开始该步骤前必须验证这些条件
+> 5. **禁止预执行** — 禁止"预准备"后续步骤的内容（例如：在策略师阶段编写SVG代码）
 
 > [!IMPORTANT]
-> ## 🌐 Language & Communication Rule
+> ## 🌐 语言与沟通规则
 >
-> - **Response language**: Always match the language of the user's input and provided source materials. For example, if the user asks in Chinese, respond in Chinese; if the source material is in English, respond in English.
-> - **Explicit override**: If the user explicitly requests a specific language (e.g., "请用英文回答" or "Reply in Chinese"), use that language instead.
-> - **Template format**: The `design_spec.md` file MUST always follow its original English template structure (section headings, field names), regardless of the conversation language. Content values within the template may be in the user's language.
+> - **回复语言**：始终匹配用户输入和提供的源材料语言。例如：用户用中文提问就用中文回复；源材料是英文就用英文回复。
+> - **明确覆盖**：如果用户明确指定语言（如"请用英文回答"或"Reply in Chinese"），则使用该语言。
+> - **模板格式**：`design_spec.md` 文件必须始终遵循其原始英文模板结构（章节标题、字段名称），无论对话使用何种语言。模板内的内容值可使用用户的语言。
 
-## Main Pipeline Scripts
+## 主要流程脚本
 
-| Script | Purpose |
-|--------|---------|
-| `${SKILL_DIR}/scripts/pdf_to_md.py` | PDF to Markdown |
-| `${SKILL_DIR}/scripts/doc_to_md.py` | Documents to Markdown via Pandoc (DOCX, EPUB, HTML, LaTeX, RST, etc.) |
-| `${SKILL_DIR}/scripts/web_to_md.py` | Web page to Markdown |
-| `${SKILL_DIR}/scripts/web_to_md.cjs` | WeChat / high-security sites to Markdown |
-| `${SKILL_DIR}/scripts/project_manager.py` | Project init / validate / manage |
-| `${SKILL_DIR}/scripts/analyze_images.py` | Image analysis |
-| `${SKILL_DIR}/scripts/image_gen.py` | AI image generation (multi-provider) |
-| `${SKILL_DIR}/scripts/svg_quality_checker.py` | SVG quality check |
-| `${SKILL_DIR}/scripts/total_md_split.py` | Speaker notes splitting |
-| `${SKILL_DIR}/scripts/finalize_svg.py` | SVG post-processing (unified entry) |
-| `${SKILL_DIR}/scripts/svg_to_pptx.py` | Export to PPTX |
+| 脚本 | 用途 |
+|------|------|
+| `${SKILL_DIR}/scripts/pdf_to_md.py` | PDF转Markdown |
+| `${SKILL_DIR}/scripts/doc_to_md.py` | 通过Pandoc将文档转换为Markdown（DOCX、EPUB、HTML、LaTeX、RST等） |
+| `${SKILL_DIR}/scripts/web_to_md.py` | 网页转Markdown |
+| `${SKILL_DIR}/scripts/web_to_md.cjs` | 微信/高安全性网站转Markdown |
+| `${SKILL_DIR}/scripts/project_manager.py` | 项目初始化/验证/管理 |
+| `${SKILL_DIR}/scripts/analyze_images.py` | 图片分析 |
+| `${SKILL_DIR}/scripts/image_gen.py` | AI图片生成（多提供商） |
+| `${SKILL_DIR}/scripts/svg_quality_checker.py` | SVG质量检查 |
+| `${SKILL_DIR}/scripts/total_md_split.py` | 演讲备注拆分 |
+| `${SKILL_DIR}/scripts/finalize_svg.py` | SVG后处理（统一入口） |
+| `${SKILL_DIR}/scripts/svg_to_pptx.py` | 导出为PPTX |
 
-For complete tool documentation, see `${SKILL_DIR}/scripts/README.md`.
+完整工具文档请参阅 `${SKILL_DIR}/scripts/README.md`。
 
-## Template Index
+## 模板索引
 
-| Index | Path | Purpose |
-|-------|------|---------|
-| Layout templates | `${SKILL_DIR}/templates/layouts/layouts_index.json` | Query available page layout templates |
-| Chart templates | `${SKILL_DIR}/templates/charts/charts_index.json` | Query available chart SVG templates |
-| Icon library | `${SKILL_DIR}/templates/icons/icons_index.json` | Query available icon names and categories |
+| 索引 | 路径 | 用途 |
+|------|------|------|
+| 布局模板 | `${SKILL_DIR}/templates/layouts/layouts_index.json` | 查询可用的页面布局模板 |
+| 图表模板 | `${SKILL_DIR}/templates/charts/charts_index.json` | 查询可用的图表SVG模板 |
+| 图标库 | `${SKILL_DIR}/templates/icons/icons_index.json` | 查询可用的图标名称和类别 |
 
-## Standalone Workflows
+## 独立工作流程
 
-| Workflow | Path | Purpose |
-|----------|------|---------|
-| `create-template` | `workflows/create-template.md` | Standalone template creation workflow |
-
----
-
-## Workflow
-
-### Step 1: Source Content Processing
-
-🚧 **GATE**: User has provided source material (PDF / DOCX / EPUB / URL / Markdown file / text description / conversation content — any form is acceptable).
-
-When the user provides non-Markdown content, convert immediately:
-
-| User Provides | Command |
-|---------------|---------|
-| PDF file | `python3 ${SKILL_DIR}/scripts/pdf_to_md.py <file>` |
-| DOCX / Word / Office document | `python3 ${SKILL_DIR}/scripts/doc_to_md.py <file>` |
-| EPUB / HTML / LaTeX / RST / other | `python3 ${SKILL_DIR}/scripts/doc_to_md.py <file>` |
-| Web link | `python3 ${SKILL_DIR}/scripts/web_to_md.py <URL>` |
-| WeChat / high-security site | `node ${SKILL_DIR}/scripts/web_to_md.cjs <URL>` |
-| Markdown | Read directly |
-
-**✅ Checkpoint — Confirm source content is ready, proceed to Step 2.**
+| 工作流程 | 路径 | 用途 |
+|----------|------|------|
+| `create-template` | `workflows/create-template.md` | 独立模板创建工作流程 |
 
 ---
 
-### Step 2: Project Initialization
+## 工作流程
 
-🚧 **GATE**: Step 1 complete; source content is ready (Markdown file, user-provided text, or requirements described in conversation are all valid).
+### 步骤1：源内容处理
+
+🚧 **门槛**：用户提供了源材料（PDF/DOCX/EPUB/URL/Markdown文件/文字描述/对话内容——任何形式均可）。
+
+当用户提供非Markdown内容时，立即转换：
+
+| 用户提供 | 命令 |
+|----------|------|
+| PDF文件 | `python3 ${SKILL_DIR}/scripts/pdf_to_md.py <file>` |
+| DOCX/Word/Office文档 | `python3 ${SKILL_DIR}/scripts/doc_to_md.py <file>` |
+| EPUB/HTML/LaTeX/RST/其他 | `python3 ${SKILL_DIR}/scripts/doc_to_md.py <file>` |
+| 网页链接 | `python3 ${SKILL_DIR}/scripts/web_to_md.py <URL>` |
+| 微信/高安全性网站 | `node ${SKILL_DIR}/scripts/web_to_md.cjs <URL>` |
+| Markdown | 直接读取 |
+
+**✅ 检查点 — 确认源内容已就绪，继续步骤2。**
+
+---
+
+### 步骤2：项目初始化
+
+🚧 **门槛**：步骤1完成；源内容已就绪（Markdown文件、用户直接提供的文本或在对话中描述的需求均有效）。
 
 ```bash
 python3 ${SKILL_DIR}/scripts/project_manager.py init <project_name> --format <format>
 ```
 
-Format options: `ppt169` (default), `ppt43`, `xhs`, `story`, etc. For the full format list, see `references/canvas-formats.md`.
+格式选项：`ppt169`（默认）、`ppt43`、`xhs`、`story` 等。完整格式列表请参阅 `references/canvas-formats.md`。
 
-Import source content (choose based on the situation):
+导入源内容（根据情况选择）：
 
-| Situation | Action |
-|-----------|--------|
-| Has source files (PDF/MD/etc.) | `python3 ${SKILL_DIR}/scripts/project_manager.py import-sources <project_path> <source_files...> --move` |
-| User provided text directly in conversation | No import needed — content is already in conversation context; subsequent steps can reference it directly |
+| 情况 | 操作 |
+|------|------|
+| 有源文件（PDF/MD等） | `python3 ${SKILL_DIR}/scripts/project_manager.py import-sources <project_path> <source_files...> --move` |
+| 用户直接在对话中提供文本 | 无需导入——内容已在对话上下文中；后续步骤可直接引用 |
 
-> ⚠️ **MUST use `--move`**: All source files (original PDF / MD / images) MUST be **moved** (not copied) into `sources/` for archiving.
-> - Markdown files generated in Step 1, original PDFs, original MDs — **all** must be moved into the project via `import-sources --move`
-> - Intermediate artifacts (e.g., `_files/` directories) are handled automatically by `import-sources`
-> - After execution, source files no longer exist at their original location
+> ⚠️ **必须使用 `--move`**：所有源文件（原始PDF/MD/图片）必须**移动**（不是复制）到 `sources/` 进行归档。
+> - 步骤1生成的Markdown文件、原始PDF、原始MD——**全部**必须通过 `import-sources --move` 移动到项目中
+> - 中间产物（如 `_files/` 目录）由 `import-sources` 自动处理
+> - 执行后，源文件在其原始位置不再存在
 
-**✅ Checkpoint — Confirm project structure created successfully, `sources/` contains all source files, converted materials are ready. Proceed to Step 3.**
+**✅ 检查点 — 确认项目结构创建成功，`sources/` 包含所有源文件，转换材料已就绪。继续步骤3。**
 
 ---
 
-### Step 3: Template Selection
+### 步骤3：模板选择
 
-🚧 **GATE**: Step 2 complete; project directory structure is ready.
+🚧 **门槛**：步骤2完成；项目目录结构已就绪。
 
-⛔ **BLOCKING**: If the user has not yet clearly expressed whether to use a template, you MUST present options and **wait for an explicit user response** before proceeding. If the user has previously stated "no template" or specified a particular template, skip this prompt and proceed directly.
+⛔ **阻塞**：如果用户尚未明确表示是否使用模板，必须呈现选项并**等待用户明确回复**后再继续。如果用户之前已声明"不使用模板"或指定了特定模板，跳过此提示直接继续。
 
-**⚡ Early-exit**: If the user has already stated "no template" / "不使用模板" / "自由设计" (or equivalent) at any prior point in the conversation, **do NOT query `layouts_index.json`** — skip directly to Step 4. This avoids unnecessary token consumption.
+**⚡ 提前退出**：如果用户在对话中任何时候已声明"不使用模板"/"不用模板"/"自由设计"（或同等含义），**不要查询 `layouts_index.json`**——直接跳到步骤4。这可避免不必要的token消耗。
 
-**Template recommendation flow** (only when the user has NOT yet decided):
-Query `${SKILL_DIR}/templates/layouts/layouts_index.json` to list available templates and their style descriptions.
-**When presenting options, you MUST provide a professional recommendation based on the current PPT topic and content** (recommend a specific template or free design, with reasoning), then ask the user:
+**模板推荐流程**（仅在用户尚未决定时）：
+查询 `${SKILL_DIR}/templates/layouts/layouts_index.json` 列出可用模板及其风格描述。
+**呈现选项时，必须根据当前PPT主题和内容提供专业推荐**（推荐特定模板或自由设计，并说明理由），然后询问用户：
 
-> 💡 **AI Recommendation**: Based on your content topic (brief summary), I recommend **[specific template / free design]** because...
+> 💡 **AI推荐**：根据您的内容主题（简要概述），我推荐**[具体模板/自由设计]**，因为...
 >
-> Which approach would you prefer?
-> **A) Use an existing template** (please specify template name or style preference)
-> **B) No template** — free design
+> 您更倾向于哪种方式？
+> **A) 使用现有模板**（请指定模板名称或风格偏好）
+> **B) 不使用模板** — 自由设计
 
-After the user confirms option A, copy template files to the project directory:
+用户确认选项A后，将模板文件复制到项目目录：
 ```bash
 cp ${SKILL_DIR}/templates/layouts/<template_name>/*.svg <project_path>/templates/
 cp ${SKILL_DIR}/templates/layouts/<template_name>/design_spec.md <project_path>/templates/
@@ -138,166 +136,166 @@ cp ${SKILL_DIR}/templates/layouts/<template_name>/*.png <project_path>/images/ 2
 cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpg <project_path>/images/ 2>/dev/null || true
 ```
 
-After the user confirms option B, proceed directly to Step 4.
+用户确认选项B后，直接继续步骤4。
 
-> To create a new global template, read `workflows/create-template.md`
+> 如需创建新的全局模板，请阅读 `workflows/create-template.md`
 
-**✅ Checkpoint — User has responded with template selection, template files copied (if option A). Proceed to Step 4.**
+**✅ 检查点 — 用户已回复模板选择，模板文件已复制（如选择A）。继续步骤4。**
 
 ---
 
-### Step 4: Strategist Phase (MANDATORY — cannot be skipped)
+### 步骤4：策略师阶段（强制执行——不可跳过）
 
-🚧 **GATE**: Step 3 complete; user has confirmed template selection.
+🚧 **门槛**：步骤3完成；用户已确认模板选择。
 
-First, read the role definitions:
+首先，读取角色定义：
 ```
-Read references/strategist.md
-Read references/shared-standards.md
+读取 references/strategist.md
+读取 references/shared-standards.md
 ```
 
-**Must complete the Eight Confirmations** (refer to `templates/design_spec_reference.md` for the template structure):
+**必须完成八项确认**（参考 `templates/design_spec_reference.md` 获取模板结构）：
 
-⛔ **BLOCKING**: The Eight Confirmations MUST be presented to the user as a bundled set of recommendations, and you MUST **wait for the user to confirm or modify** before outputting the Design Specification & Content Outline. This is one of only two core confirmation points in the workflow (the other is template selection). Once confirmed, all subsequent script execution and slide generation should proceed fully automatically.
+⛔ **阻塞**：八项确认必须作为一整套建议呈现给用户，**必须等待用户确认或修改**后才能输出设计规范和内容大纲。这是工作流程中仅有的两个核心确认点之一（另一个是模板选择）。一旦确认，所有后续脚本执行和幻灯片生成应完全自动进行。
 
-1. Canvas format
-2. Page count range
-3. Target audience
-4. Style objective
-5. Color scheme
-6. Icon usage approach
-7. Typography plan
-8. Image usage approach
+1. 画布格式
+2. 页面数量范围
+3. 目标受众
+4. 风格目标
+5. 配色方案
+6. 图标使用方式
+7. 字体排版方案
+8. 图片使用方式
 
-If the user has provided images, run the analysis script **before outputting the design spec** (do NOT directly read/open image files — use the script output only):
+如果用户提供了图片，在**输出设计规范之前**运行分析脚本（不要直接读取/打开图片文件——仅使用脚本输出）：
 ```bash
 python3 ${SKILL_DIR}/scripts/analyze_images.py <project_path>/images
 ```
 
-> ⚠️ **Image handling rule**: The AI must NEVER directly read, open, or view image files (`.jpg`, `.png`, etc.). All image information must come from the `analyze_images.py` script output or the Design Specification's Image Resource List.
+> ⚠️ **图片处理规则**：AI 不得直接读取、打开或查看图片文件（`.jpg`、`.png` 等）。所有图片信息必须来自 `analyze_images.py` 脚本输出或设计规范中的图片资源列表。
 
-**Output**: `<project_path>/design_spec.md`
+**输出**：`<project_path>/design_spec.md`
 
-**✅ Checkpoint — Phase deliverables complete, auto-proceed to next step**:
+**✅ 检查点 — 阶段交付物完成，自动继续下一步**：
 ```markdown
-## ✅ Strategist Phase Complete
-- [x] Eight Confirmations completed (user confirmed)
-- [x] Design Specification & Content Outline generated
-- [ ] **Next**: Auto-proceed to [Image_Generator / Executor] phase
+## ✅ 策略师阶段完成
+- [x] 八项确认完成（用户已确认）
+- [x] 设计规范和内容大纲已生成
+- [ ] **下一步**：自动继续 [图片生成器/执行器] 阶段
 ```
 
 ---
 
-### Step 5: Image_Generator Phase (Conditional)
+### 步骤5：图片生成器阶段（条件执行）
 
-🚧 **GATE**: Step 4 complete; Design Specification & Content Outline generated and user confirmed.
+🚧 **门槛**：步骤4完成；设计规范和内容大纲已生成并经用户确认。
 
-> **Trigger condition**: Image approach includes "AI generation". If not triggered, skip directly to Step 6 (Step 6 GATE must still be satisfied).
+> **触发条件**：图片方式包含"AI生成"。如未触发，直接跳到步骤6（仍需满足步骤6的门槛）。
 
-Read `references/image-generator.md`
+读取 `references/image-generator.md`
 
-1. Extract all images with status "pending generation" from the design spec
-2. Generate prompt document → `<project_path>/images/image_prompts.md`
-3. Generate images (CLI tool recommended):
+1. 从设计规范中提取所有状态为"待生成"的图片
+2. 生成提示文档 → `<project_path>/images/image_prompts.md`
+3. 生成图片（推荐使用CLI工具）：
    ```bash
    python3 ${SKILL_DIR}/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_size 1K -o <project_path>/images
    ```
 
-**✅ Checkpoint — Confirm all images are ready, proceed to Step 6**:
+**✅ 检查点 — 确认所有图片已就绪，继续步骤6**：
 ```markdown
-## ✅ Image_Generator Phase Complete
-- [x] Prompt document created
-- [x] All images saved to images/
+## ✅ 图片生成器阶段完成
+- [x] 提示文档已创建
+- [x] 所有图片已保存到 images/
 ```
 
 ---
 
-### Step 6: Executor Phase
+### 步骤6：执行器阶段
 
-🚧 **GATE**: Step 4 (and Step 5 if triggered) complete; all prerequisite deliverables are ready.
+🚧 **门槛**：步骤4（及步骤5，如触发）完成；所有前置交付物已就绪。
 
-Read the role definition based on the selected style:
+根据选择的风格读取角色定义：
 ```
-Read references/executor-base.md          # REQUIRED: common guidelines
-Read references/executor-general.md       # General flexible style
-Read references/executor-consultant.md    # Consulting style
-Read references/executor-consultant-top.md # Top consulting style (MBB level)
+读取 references/executor-base.md          # 必需：通用指南
+读取 references/executor-general.md       # 通用灵活风格
+读取 references/executor-consultant.md    # 咨询风格
+读取 references/executor-consultant-top.md # 顶级咨询风格（MBB级别）
 ```
 
-> Only need to read executor-base + one style file.
+> 只需读取 executor-base + 一种风格文件。
 
-**Design Parameter Confirmation (Mandatory)**: Before generating the first SVG, the Executor MUST review and output key design parameters from the Design Specification (canvas dimensions, color scheme, font plan, body font size) to ensure spec adherence. See executor-base.md Section 2 for details.
+**设计参数确认（强制）**：在生成第一个SVG之前，执行器必须审查并输出设计规范中的关键设计参数（画布尺寸、配色方案、字体计划、正文字号）以确保符合规范。具体见 executor-base.md 第2节。
 
-**Visual Construction Phase**:
-- Batch-generate SVG pages → `<project_path>/svg_output/`
+**视觉构建阶段**：
+- 批量生成SVG页面 → `<project_path>/svg_output/`
 
-**Logic Construction Phase**:
-- Generate speaker notes → `<project_path>/notes/total.md`
+**逻辑构建阶段**：
+- 生成演讲备注 → `<project_path>/notes/total.md`
 
-**✅ Checkpoint — Confirm all SVGs and notes are fully generated. Proceed directly to Step 7 post-processing**:
+**✅ 检查点 — 确认所有SVG和备注已完全生成。直接继续步骤7后处理**：
 ```markdown
-## ✅ Executor Phase Complete
-- [x] All SVGs generated to svg_output/
-- [x] Speaker notes generated at notes/total.md
+## ✅ 执行器阶段完成
+- [x] 所有SVG已生成到 svg_output/
+- [x] 演讲备注已生成到 notes/total.md
 ```
 
 ---
 
-### Step 7: Post-processing & Export
+### 步骤7：后处理与导出
 
-🚧 **GATE**: Step 6 complete; all SVGs generated to `svg_output/`; speaker notes `notes/total.md` generated.
+🚧 **门槛**：步骤6完成；所有SVG已生成到 `svg_output/`；演讲备注 `notes/total.md` 已生成。
 
-> ⚠️ The following three sub-steps MUST be **executed individually one at a time**. Each command must complete and be confirmed successful before running the next.
-> ❌ **NEVER** put all three commands in a single code block or single shell invocation.
+> ⚠️ 以下三个子步骤必须**逐个单独执行**。每个命令必须完成并确认成功后再运行下一个。
+> ❌ **禁止**将三个命令放在单个代码块或单次shell调用中。
 
-**Step 7.1** — Split speaker notes:
+**步骤7.1** — 拆分演讲备注：
 ```bash
 python3 ${SKILL_DIR}/scripts/total_md_split.py <project_path>
 ```
 
-**Step 7.2** — SVG post-processing (icon embedding / image crop & embed / text flattening / rounded rect to path):
+**步骤7.2** — SVG后处理（图标嵌入/图片裁剪与嵌入/文本扁平化/圆角矩形转路径）：
 ```bash
 python3 ${SKILL_DIR}/scripts/finalize_svg.py <project_path>
 ```
 
-**Step 7.3** — Export PPTX (embeds speaker notes by default):
+**步骤7.3** — 导出PPTX（默认嵌入演讲备注）：
 ```bash
 python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path> -s final
-# Default: generates two files — native shapes (.pptx) + SVG reference (_svg.pptx)
-# Use --only native  to skip SVG reference version
-# Use --only legacy  to only generate SVG image version
+# 默认：生成两个文件 — 原生形状(.pptx) + SVG参考(_svg.pptx)
+# 使用 --only native 跳过SVG参考版本
+# 使用 --only legacy 仅生成SVG图片版本
 ```
 
-> ❌ **NEVER** use `cp` as a substitute for `finalize_svg.py` — it performs multiple critical processing steps
-> ❌ **NEVER** export directly from `svg_output/` — MUST use `-s final` to export from `svg_final/`
-> ❌ **NEVER** add extra flags like `--only`
+> ❌ **禁止**使用 `cp` 替代 `finalize_svg.py`——它执行多个关键处理步骤
+> ❌ **禁止**直接从 `svg_output/` 导出——必须使用 `-s final` 从 `svg_final/` 导出
+> ❌ **禁止**添加额外标志如 `--only`
 
 ---
 
-## Role Switching Protocol
+## 角色切换协议
 
-Before switching roles, you **MUST first read** the corresponding reference file — skipping is FORBIDDEN. Output marker:
+切换角色前，**必须首先读取**相应的参考文件——禁止跳过。输出标记：
 
 ```markdown
-## [Role Switch: <Role Name>]
-📖 Reading role definition: references/<filename>.md
-📋 Current task: <brief description>
+## [角色切换：<角色名称>]
+📖 读取角色定义：references/<filename>.md
+📋 当前任务：<简要描述>
 ```
 
 ---
 
-## Reference Resources
+## 参考资源
 
-| Resource | Path |
-|----------|------|
-| Shared technical constraints | `references/shared-standards.md` |
-| Canvas format specification | `references/canvas-formats.md` |
-| Image layout specification | `references/image-layout-spec.md` |
-| SVG image embedding | `references/svg-image-embedding.md` |
+| 资源 | 路径 |
+|------|------|
+| 共享技术约束 | `references/shared-standards.md` |
+| 画布格式规范 | `references/canvas-formats.md` |
+| 图片布局规范 | `references/image-layout-spec.md` |
+| SVG图片嵌入 | `references/svg-image-embedding.md` |
 
 ---
 
-## Notes
+## 注意事项
 
-- Do NOT add extra flags like `--only` to the post-processing commands — run them as-is
-- Local preview: `python3 -m http.server -d <project_path>/svg_final 8000`
+- 后处理命令不要添加额外标志如 `--only`——原样运行
+- 本地预览：`python3 -m http.server -d <project_path>/svg_final 8000`

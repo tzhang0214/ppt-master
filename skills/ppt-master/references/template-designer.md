@@ -1,175 +1,175 @@
-> See shared-standards.md for common technical constraints.
+> 通用技术约束请参见 shared-standards.md。
 
-# Template Designer — Template Design Role
+# 模板设计师 — 模板设计角色
 
-## Core Mission
+## 核心使命
 
-Generate reusable page templates for the **global template library** based on a finalized template brief.
+基于最终确定的模板需求，为**全局模板库**生成可复用的页面模板。
 
-> This is a standalone role: only triggered via the `/create-template` workflow. It is **not** the project-level template selection/customization step in the main PPT generation pipeline.
+> 这是一个独立角色：仅通过 `/create-template` 工作流触发。**不是**主 PPT 生成流程中的项目级模板选择/定制步骤。
 
-## Usage
+## 使用方式
 
-- **Trigger**: `/create-template` workflow
-- **Output location**: `templates/layouts/<template_name>/`
-- **Input**: finalized template brief (template ID, display name, category, applicable scenarios, tone, theme mode, canvas format, optional reference assets)
-
----
-
-## Core Template Inventory
-
-| # | Filename | Purpose | Description |
-|---|----------|---------|-------------|
-| 01 | `01_cover.svg` | Cover | Fixed structure: title, subtitle, date, organization |
-| 02 | `02_chapter.svg` | Chapter page | Fixed structure: chapter number, chapter title |
-| 03 | `03_content.svg` | Content page | Flexible structure: only defines header/footer; content area freely laid out by AI |
-| 04 | `04_ending.svg` | Ending page | Fixed structure: thank-you message, contact info |
-| -- | `02_toc.svg` | Table of contents | Optional: TOC title, chapter list (number + title) |
-
-**Design philosophy**: Templates define visual consistency and structural pages; content pages maintain maximum flexibility.
-
-**Naming note**: TOC page keeps `02_toc.svg` naming for template library compatibility and sort order.
-
-### Optional Extension Pages (As Needed)
-
-- Transition / sub-section page (e.g., `05_section_break.svg`)
-- Appendix page (e.g., `06_appendix.svg`)
-- Disclaimer / confidentiality page (e.g., `07_disclaimer.svg`)
+- **触发**： `/create-template` 工作流
+- **输出位置**： `templates/layouts/<模板名称>/`
+- **输入**：最终确定的模板需求（模板ID、显示名称、分类、适用场景、风格、主题模式、画布格式、可选参考资产）
 
 ---
 
-## Template Design Specifications
+## 核心模板清单
 
-### 1. Must Generate design_spec.md
+| # | 文件名 | 用途 | 描述 |
+|---|--------|------|------|
+| 01 | `01_cover.svg` | 封面 | 固定结构：标题、副标题、日期、组织 |
+| 02 | `02_chapter.svg` | 章节页 | 固定结构：章节编号、章节标题 |
+| 03 | `03_content.svg` | 内容页 | 灵活结构：仅定义头/脚；内容区由AI自由排版 |
+| 04 | `04_ending.svg` | 结束页 | 固定结构：感谢语、联系信息 |
+| -- | `02_toc.svg` | 目录页 | 可选：目录标题、章节列表（编号+标题） |
 
-When creating a global template, a `design_spec.md` must be generated, containing:
+**设计理念**：模板定义视觉一致性和结构化页面；内容页保持最大灵活性。
+
+**命名注意**：目录页保持 `02_toc.svg` 命名以兼容模板库排序。
+
+### 可选扩展页面（按需）
+
+- 转场/子章节页（如 `05_section_break.svg`）
+- 附录页（如 `06_appendix.svg`）
+- 免责声明/保密页（如 `07_disclaimer.svg`）
+
+---
+
+## 模板设计规范
+
+### 1. 必须生成 design_spec.md
+
+创建全局模板时，必须生成 `design_spec.md`，包含：
 
 ```markdown
-# [Template Name] - Design Specification
+# [模板名称] - 设计规范
 
-## I. Template Overview (name, use cases, design tone)
-## II. Canvas Specification (16:9, 1280x720, viewBox)
-## III. Color Scheme (primary, secondary, accent HEX values)
-## IV. Typography System (font stack, font size hierarchy)
-## V. Page Structure (common layout, decorative design)
-## VI. Page Types (4 core page types)
-## VII. Layout Modes (recommended)
-## VIII. Spacing Specification
-## IX. SVG Technical Constraints
-## X. Placeholder Specification
+## I. 模板概览（名称、用途、设计风格）
+## II. 画布规格（16:9、1280x720、viewBox）
+## III. 配色方案（主色、次色、强调色HEX值）
+## IV. 字体系统（字体栈、字号层级）
+## V. 页面结构（常用布局、装饰设计）
+## VI. 页面类型（4种核心页面类型）
+## VII. 布局模式（推荐）
+## VIII. 间距规范
+## IX. SVG技术约束
+## X. 占位符规范
 ```
 
-### 2. Inherit Design Specification
+### 2. 遵循设计规范
 
-Templates must strictly follow the finalized template brief and the generated `design_spec.md`:
-- **Canvas dimensions**: viewBox matches the design spec
-- **Color scheme**: Uses primary, secondary, and accent colors from the spec
-- **Font plan**: Uses font presets from the spec
-- **Layout principles**: Margins and spacing conform to the spec
+模板必须严格遵循最终确定的模板需求和生成的 `design_spec.md`：
+- **画布尺寸**：viewBox 与设计规范匹配
+- **配色方案**：使用规范中的主色、次色和强调色
+- **字体方案**：使用规范中的字体预设
+- **布局原则**：边距和间距符合规范
 
-### 3. Placeholder Markers
+### 3. 占位符标记
 
-Use clear placeholder markers for replaceable content:
+为可替换内容使用清晰的占位符标记：
 
 ```xml
-<!-- Text placeholder -->
+<!-- 文字占位符 -->
 <text x="80" y="320" fill="#FFFFFF" font-size="48" font-weight="bold">
   {{TITLE}}
 </text>
 
-<!-- Content area placeholder (content page only) -->
+<!-- 内容区占位符（仅内容页） -->
 <rect x="40" y="90" width="1200" height="550" fill="#FFFFFF" rx="8"/>
 <text x="640" y="365" text-anchor="middle" fill="#CBD5E1" font-size="16">
   {{CONTENT_AREA}}
 </text>
 ```
 
-### 4. Placeholder Reference
+### 4. 占位符参考
 
-| Placeholder | Purpose | Applicable Template |
-|------------|---------|-------------------|
-| `{{TITLE}}` | Main title | Cover |
-| `{{SUBTITLE}}` | Subtitle | Cover |
-| `{{DATE}}` | Date | Cover |
-| `{{AUTHOR}}` | Author / Organization | Cover |
-| `{{CHAPTER_NUM}}` | Chapter number | Chapter page |
-| `{{CHAPTER_TITLE}}` | Chapter title | Chapter page |
-| `{{CHAPTER_DESC}}` | Chapter description | Chapter page |
-| `{{PAGE_TITLE}}` | Page title | Content page |
-| `{{KEY_MESSAGE}}` | Key takeaway | Content page (consulting style) |
-| `{{CONTENT_AREA}}` | Content area | Content page |
-| `{{SECTION_NAME}}` | Section name | Content page footer |
-| `{{SOURCE}}` | Data source | Content page footer |
-| `{{PAGE_NUM}}` | Page number | Content page, ending page |
-| `{{THANK_YOU}}` | Thank-you message | Ending page |
-| `{{ENDING_SUBTITLE}}` | Ending subtitle | Ending page |
-| `{{CLOSING_MESSAGE}}` | Closing message | Ending page |
-| `{{CONTACT_INFO}}` | Contact info | Ending page |
-| `{{COPYRIGHT}}` | Copyright | Ending page |
+| 占位符 | 用途 | 适用模板 |
+|--------|------|---------|
+| `{{TITLE}}` | 主标题 | 封面 |
+| `{{SUBTITLE}}` | 副标题 | 封面 |
+| `{{DATE}}` | 日期 | 封面 |
+| `{{AUTHOR}}` | 作者/组织 | 封面 |
+| `{{CHAPTER_NUM}}` | 章节编号 | 章节页 |
+| `{{CHAPTER_TITLE}}` | 章节标题 | 章节页 |
+| `{{CHAPTER_DESC}}` | 章节描述 | 章节页 |
+| `{{PAGE_TITLE}}` | 页面标题 | 内容页 |
+| `{{KEY_MESSAGE}}` | 关键信息 | 内容页（咨询风格） |
+| `{{CONTENT_AREA}}` | 内容区 | 内容页 |
+| `{{SECTION_NAME}}` | 章节名称 | 内容页脚注 |
+| `{{SOURCE}}` | 数据来源 | 内容页脚注 |
+| `{{PAGE_NUM}}` | 页码 | 内容页、结束页 |
+| `{{THANK_YOU}}` | 感谢语 | 结束页 |
+| `{{ENDING_SUBTITLE}}` | 结束页副标题 | 结束页 |
+| `{{CLOSING_MESSAGE}}` | 结束语 | 结束页 |
+| `{{CONTACT_INFO}}` | 联系信息 | 结束页 |
+| `{{COPYRIGHT}}` | 版权信息 | 结束页 |
 
-For TOC pages in **newly created library templates**, use indexed placeholders:
+对于**新建库模板**中的目录页，使用索引式占位符：
 
-- `{{TOC_ITEM_1_TITLE}}`, `{{TOC_ITEM_1_DESC}}`
-- `{{TOC_ITEM_2_TITLE}}`, `{{TOC_ITEM_2_DESC}}`
+- `{{TOC_ITEM_1_TITLE}}`、`{{TOC_ITEM_1_DESC}}`
+- `{{TOC_ITEM_2_TITLE}}`、`{{TOC_ITEM_2_DESC}}`
 - ...
 
-Do **not** create new TOC placeholder families such as `{{CHAPTER_01_TITLE}}` for new templates. Existing templates may contain legacy placeholder variants, but new library assets should converge on the indexed TOC contract.
+**禁止**为新模板创建新的目录占位符系列如 `{{CHAPTER_01_TITLE}}`。现有模板可能包含旧版占位符变体，但新库资源应收敛到索引式目录约定。
 
 ---
 
-## Output Requirements
+## 输出要求
 
-### File Save Location
+### 文件保存位置
 
 ```
-templates/layouts/<template_name>/
-├── design_spec.md     # Design specification (required)
+templates/layouts/<模板名称>/
+├── design_spec.md     # 设计规范（必需）
 ├── 01_cover.svg
 ├── 02_chapter.svg
-├── 02_toc.svg          # Optional
+├── 02_toc.svg          # 可选
 ├── 03_content.svg
 ├── 04_ending.svg
-└── *.png / *.jpg       # Image assets (if any)
+└── *.png / *.jpg       # 图片资产（如有）
 ```
 
-### Template Preview
+### 模板预览
 
-After each template is generated, provide a brief summary table listing each template's status.
+每个模板生成后，提供简要摘要表列出每个模板的状态。
 
 ---
 
-## Using Pre-built Template Library (Optional)
+## 使用预建模板库（可选）
 
-If suitable template resources already exist, use them directly instead of generating new ones:
+如已存在合适的模板资源，直接使用而非重新生成：
 
-1. **Copy template**: Copy template files to the project's `templates/` directory
-2. **Adjust colors**: Modify colors per the project design spec
-3. **Customize**: Make project-specific adjustments
+1. **复制模板**：将模板文件复制到项目的 `templates/` 目录
+2. **调整颜色**：根据项目设计规范修改颜色
+3. **定制**：进行项目特定调整
 
-This section describes downstream reuse. The `Template_Designer` role itself is responsible for creating or normalizing the reusable library asset first.
+本节描述下游复用。`模板_设计师` 角色本身负责首先创建或规范化可复用库资源。
 
-**Example library structure** (query `templates/layouts/layouts_index.json`):
+**示例库结构**（查询 `templates/layouts/layouts_index.json`）：
 
 ```
 templates/layouts/
-├── exhibit/           # Exhibit style (conclusion-first, data-driven)
-├── 科技蓝商务/         # Tech blue business style
-└── smart_red/         # Smart red-orange style
+├── exhibit/           # 展览风格（结论先行、数据驱动）
+├── 科技蓝商务/         # 科技蓝商务风格
+└── smart_red/         # 智能红橙色风格
 ```
 
 ---
 
-## Phase Completion Checkpoint
+## 阶段完成检查点
 
 ```markdown
-## Template_Designer Phase Complete
+## 模板_设计师 阶段完成
 
-- [x] Read `references/template-designer.md`
-- [x] Generated 4 core page templates
-- [ ] TOC page template (optional)
-- [ ] Optional extension pages (if needed)
-- [x] All templates saved to `templates/layouts/<template_name>/`
-- [x] Templates follow design spec (colors, fonts, layout)
-- [x] Placeholder markers are clear and standardized
-- [ ] **Next step**: Validate assets and register the template in `layouts_index.json`
+- [x] 阅读 `references/template-designer.md`
+- [x] 生成4个核心页面模板
+- [ ] 目录页模板（可选）
+- [ ] 可选扩展页面（如需要）
+- [x] 所有模板保存到 `templates/layouts/<模板名称>/`
+- [x] 模板遵循设计规范（颜色、字体、布局）
+- [x] 占位符标记清晰标准化
+- [ ] **下一步**：验证资产并将模板注册到 `layouts_index.json`
 ```

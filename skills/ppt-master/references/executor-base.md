@@ -1,179 +1,179 @@
-# Executor Common Guidelines
+# 执行器通用指南
 
-> Style-specific content is in the corresponding `executor-{style}.md`. Technical constraints are in shared-standards.md.
+> 风格特定内容在对应的 `executor-{风格}.md` 中。技术约束在 shared-standards.md 中。
 
 ---
 
-## 1. Template Adherence Rules
+## 1. 模板遵循规则
 
-If template files exist in the project's `templates/` directory, the template structure must be followed:
+如果项目 `templates/` 目录存在模板文件，必须遵循模板结构：
 
-| Page Type | Corresponding Template | Adherence Rules |
-|-----------|----------------------|-----------------|
-| Cover | `01_cover.svg` | Inherit background, decorative elements, layout structure; replace placeholder content |
-| Chapter | `02_chapter.svg` | Inherit numbering style, title position, decorative elements |
-| Content | `03_content.svg` | Inherit header/footer styles; **content area may be freely laid out** |
-| Ending | `04_ending.svg` | Inherit background, thank-you message position, contact info layout |
-| TOC | `02_toc.svg` | **Optional**: Inherit TOC title, list styles |
+| 页面类型 | 对应模板 | 遵循规则 |
+|---------|---------|---------|
+| 封面 | `01_cover.svg` | 继承背景、装饰元素、布局结构；替换占位符内容 |
+| 章节 | `02_chapter.svg` | 继承编号样式、标题位置、装饰元素 |
+| 内容 | `03_content.svg` | 继承头/脚样式；**内容区可由执行器自由排版** |
+| 结束 | `04_ending.svg` | 继承背景、感谢语位置、联系信息布局 |
+| 目录 | `02_toc.svg` | **可选**：继承目录标题、列表样式 |
 
-### Page-Template Mapping Declaration (Required Output)
+### 页面-模板映射声明（必需输出）
 
-Before generating each page, you must explicitly output which template (or "free design") is used:
+生成每个页面前，必须明确输出使用的模板（或"自由设计"）：
 
 ```
-📝 **Template mapping**: `templates/01_cover.svg` (or "None (free design)")
-🎯 **Adherence rules / layout strategy**: [specific description]
+📝 **模板映射**: `templates/01_cover.svg`（或"无（自由设计）"）
+🎯 **遵循规则/布局策略**: [具体描述]
 ```
 
-- **Content pages**: Templates only define header and footer; the content area is freely laid out by the Executor
-- **No template**: Generate entirely per the Design Specification & Content Outline
+- **内容页面**：模板仅定义头和脚；内容区由执行器自由排版
+- **无模板**：完全按照设计规范与内容大纲生成
 
 ---
 
-## 2. Design Parameter Confirmation (Mandatory Step)
+## 2. 设计参数确认（强制步骤）
 
-> Before generating the first SVG page, you **must review the key design parameters from the Design Specification & Content Outline** to ensure all subsequent generation strictly follows the spec.
+> 在生成第一个SVG页面之前，你**必须**审查设计规范与内容大纲中的关键设计参数，确保所有后续生成严格遵循规范。
 
-Must output confirmation including: canvas dimensions, body font size, color scheme (primary/secondary/accent HEX values), font plan.
+必须输出确认，包含：画布尺寸、正文字号、配色方案（主色/次色/强调色HEX值）、字体方案。
 
-**Why is this step mandatory?** Prevents the "spec says one thing, execution does another" disconnect.
-
----
-
-## 3. Execution Guidelines
-
-- **Proximity principle**: Place related elements close together to form visual groups; increase spacing between unrelated groups to reinforce logical structure
-- **Absolute spec adherence**: Strictly follow the color, layout, canvas format, and typography parameters in the spec
-- **Follow template structure**: If templates exist, inherit the template's visual framework
-- **Phased batch generation** (recommended):
-  1. **Visual Construction Phase**: Generate all SVG pages continuously, ensuring high consistency in design style and layout coordinates (Visual Consistency)
-  2. **Logic Construction Phase**: After all SVGs are finalized, batch-generate speaker notes to ensure narrative coherence (Narrative Continuity)
-- **Technical specifications**: See [shared-standards.md](shared-standards.md) for SVG technical constraints and PPT compatibility rules
-
-### SVG File Naming Convention
-
-File naming format: `<number>_<page_name>.svg`
-
-- **Chinese content** → Chinese naming: `01_封面.svg`, `02_目录.svg`, `03_核心优势.svg`
-- **English content** → English naming: `01_cover.svg`, `02_agenda.svg`, `03_key_benefits.svg`
-- **Number rules**: Two-digit numbers, starting from 01
-- **Page name**: Concise and descriptive, matching the page title in the Design Specification & Content Outline
+**为什么此步骤是强制的？** 防止"规范说一套，执行做一套"的脱节。
 
 ---
 
-## 4. Icon Usage
+## 3. 执行指南
 
-Four approaches: **A: Emoji** (`<text>🚀</text>`) | **B: AI-generated** (SVG basic shapes) | **C: Built-in library** (`templates/icons/` 640+ icons, recommended) | **D: Custom** (user-specified)
+- **临近原则**：将相关元素靠近放置形成视觉组；增加不相关组之间的间距以强化逻辑结构
+- **绝对规范遵循**：严格遵循规范中的颜色、布局、画布格式和排版参数
+- **遵循模板结构**：如存在模板，继承模板的视觉框架
+- **分阶段批量生成**（推荐）：
+  1. **视觉构建阶段**：连续生成所有SVG页面，确保设计风格和布局坐标高度一致（视觉一致性）
+  2. **逻辑构建阶段**：所有SVG定稿后，批量生成演讲备注确保叙事连贯（叙事连贯性）
+- **技术规范**：SVG技术约束和PPT兼容性规则参见 [shared-standards.md](shared-standards.md)
 
-**Built-in icons — Placeholder method (recommended)**:
+### SVG文件命名规范
+
+文件命名格式：`<编号>_<页面名称>.svg`
+
+- **中文内容** → 中文命名：`01_封面.svg`、`02_目录.svg`、`03_核心优势.svg`
+- **英文内容** → 英文命名：`01_cover.svg`、`02_agenda.svg`、`03_key_benefits.svg`
+- **编号规则**：两位数字，从01开始
+- **页面名称**：简洁有描述性，与设计规范中的页面标题匹配
+
+---
+
+## 4. 图标使用
+
+四种方式：**A: Emoji**（`<text>🚀</text>`） | **B: AI生成**（SVG基本形状） | **C: 内置库**（`templates/icons/` 640+图标，推荐） | **D: 自定义**（用户指定）
+
+**内置图标 — 占位符方式（推荐）**：
 
 ```xml
 <use data-icon="chart-bar" x="100" y="200" width="48" height="48" fill="#005587"/>
 ```
 
-> No need to manually run `embed_icons.py`; `finalize_svg.py` post-processing tool will auto-embed icons.
+> 无需手动运行 `embed_icons.py`；后处理工具 `finalize_svg.py` 会自动嵌入图标。
 
-**Common icons**: `chart-bar` `arrow-trend-up` `users` `cog` `circle-checkmark` `target` `clock` `file` `dollar` `lightbulb`
+**常用图标**：`chart-bar` `arrow-trend-up` `users` `cog` `circle-checkmark` `target` `clock` `file` `dollar` `lightbulb`
 
-> ⚠️ **Icon validation rule**: If the Design Specification includes an icon inventory list, Executor may **only** use icons from that approved list. Using icon names not in the index is FORBIDDEN — verify against `templates/icons/icons_index.json` if uncertain.
+> ⚠️ **图标验证规则**：如果设计规范包含图标清单，执行器**只能**使用该批准列表中的图标。使用索引中不存在的图标名称是**禁止**的——如有疑问请对照 `templates/icons/icons_index.json` 验证。
 
-Full index: `templates/icons/README.md`
-
----
-
-## 5. Chart Reference
-
-When the Design Spec includes a **VII. Chart Reference List**, read the referenced SVG templates from `templates/charts/` to understand common chart patterns.
-
-**Adaptation rules**:
-- **Must preserve**: Chart type (bar/line/pie etc.) as specified in the Design Spec
-- **Must adapt**: Data values, labels, colors (match the project's color scheme), and dimensions to fit the page layout
-- **May adjust**: Axis ranges, grid lines, legend position, spacing — as long as the chart remains accurate and readable
-- **Must NOT**: Change chart type without Design Spec justification, or remove data points specified in the outline
-
-> Chart templates: `templates/charts/` (33 types). Index: `templates/charts/charts_index.json`
+完整索引：`templates/icons/README.md`
 
 ---
 
-## 6. Image Handling
+## 5. 图表参考
 
-Handle images based on their status in the Design Specification's "Image Resource List":
+当设计规范包含 **VII. 图表参考列表** 时，从 `templates/charts/` 阅读参考SVG模板以了解常见图表模式。
 
-| Status | Source | Handling |
-|--------|--------|----------|
-| **Existing** | User-provided | Reference images directly from `../images/` directory |
-| **AI-generated** | Generated by Image_Generator | Images already in `../images/`, reference directly |
-| **Placeholder** | Not yet prepared | Use dashed border placeholder |
+**适配规则**：
+- **必须保留**：设计规范中指定的图表类型（柱图/线图/饼图等）
+- **必须适配**：数据值、标签、颜色（匹配项目配色方案）、尺寸以适应页面布局
+- **可调整**：坐标轴范围、网格线、图例位置、间距——只要图表保持准确可读
+- **禁止**：未经设计规范论证改变图表类型，或删除大纲中指定的数据点
 
-**Reference**: `<image href="../images/xxx.png" ... preserveAspectRatio="xMidYMid slice"/>`
-
-**Placeholder**: Dashed border `<rect stroke-dasharray="8,4" .../>` + description text
+> 图表模板：`templates/charts/`（33种类型）。索引：`templates/charts/charts_index.json`
 
 ---
 
-## 7. Font Usage
+## 6. 图片处理
 
-Apply corresponding fonts for different text roles based on the font plan in the Design Specification & Content Outline:
+根据设计规范"图片资源列表"中的状态处理图片：
 
-| Role | Chinese Recommended | English Recommended |
-|------|--------------------|--------------------|
-| Title font | Microsoft YaHei / KaiTi / SimHei | Arial / Georgia |
-| Body font | Microsoft YaHei / SimSun | Calibri / Times |
-| Emphasis font | SimHei | Arial Black / Consolas |
-| Annotation font | Microsoft YaHei / SimSun | Arial / Times |
+| 状态 | 来源 | 处理方式 |
+|------|------|---------|
+| **已有** | 用户提供 | 直接从 `../images/` 目录引用图片 |
+| **AI生成** | 图片生成器生成 | 图片已在 `../images/` 中，直接引用 |
+| **占位符** | 尚未准备 | 使用虚线边框占位符 |
 
----
+**引用方式**：`<image href="../images/xxx.png" ... preserveAspectRatio="xMidYMid slice"/>`
 
-## 8. Speaker Notes Generation Framework
-
-### Task 1. Generate Complete Speaker Notes Document
-
-After **all SVG pages are generated and finalized**, enter the "Logic Construction Phase" and generate the complete speaker notes document in `notes/total.md`.
-
-**Why not generate page-by-page?** Batch-writing notes allows planning transitions like a script, ensuring coherent presentation logic.
-
-**Format**: Each page starts with `# <number>_<page_title>`, separated by `---` between pages. Each page includes: script text (2-5 sentences), `Key points: ① ② ③`, `Duration: X minutes`. Except for the first page, each page's text starts with a `[Transition]` phrase.
-
-**Basic stage direction markers** (common to all styles):
-
-| Marker | Purpose |
-|--------|---------|
-| `[Pause]` | Whitespace after key content, letting the audience absorb |
-| `[Transition]` | Standalone paragraph at the start of each page's text, bridging from the previous page |
-
-> Each style may extend with additional markers (`[Interactive]`/`[Data]`/`[Scan Room]`/`[Benchmark]` etc.), see `executor-{style}.md`.
-
-**Requirements**:
-
-- Notes should be conversational and flow naturally
-- Highlight each page's core information and presentation key points
-- Users can manually edit and override in the `notes/` directory
-
-### Task 2. Split Into Per-Page Note Files
-
-Automatically split `notes/total.md` into individual speaker note files in the `notes/` directory.
-
-**File naming convention**:
-
-- **Recommended**: Match SVG names (e.g., `01_cover.svg` → `notes/01_cover.md`)
-- **Compatible**: Also supports `slide01.md` format (backward compatibility)
+**占位符**：虚线边框 `<rect stroke-dasharray="8,4" .../>` + 描述文字
 
 ---
 
-## 9. Next Steps After Completion
+## 7. 字体使用
 
-> **Auto-continuation**: After Visual Construction Phase (all SVG pages) and Logic Construction Phase (all notes) are complete, the Executor proceeds directly to the post-processing pipeline.
+根据设计规范与内容大纲中的字体方案，为不同文字角色应用对应字体：
 
-**Post-processing & Export** (see [shared-standards.md](shared-standards.md)):
+| 角色 | 中文推荐 | 英文推荐 |
+|------|---------|---------|
+| 标题字体 | Microsoft YaHei / KaiTi / SimHei | Arial / Georgia |
+| 正文字体 | Microsoft YaHei / SimSun | Calibri / Times |
+| 强调字体 | SimHei | Arial Black / Consolas |
+| 注释字体 | Microsoft YaHei / SimSun | Arial / Times |
+
+---
+
+## 8. 演讲备注生成框架
+
+### 任务1：生成完整演讲备注文档
+
+在**所有SVG页面生成并定稿后**，进入"逻辑构建阶段"并在 `notes/total.md` 中生成完整演讲备注文档。
+
+**为什么不逐页生成？** 批量编写备注可以像剧本一样规划转场，确保演示逻辑连贯。
+
+**格式**：每页以 `# <编号>_<页面标题>` 开头，页面间用 `---` 分隔。每页包含：演讲文稿（2-5句）、`关键要点: ① ② ③`、`时长: X分钟`。除第一页外，每页文字以 `[过渡]` 短语开头。
+
+**基本舞台指示标记**（所有风格通用）：
+
+| 标记 | 用途 |
+|------|------|
+| `[Pause]` | 关键内容后的留白，让观众吸收 |
+| `[Transition]` | 每页文字开头的独立段落，衔接上一页 |
+
+> 每种风格可扩展额外标记（`[Interactive]`/`[Data]`/`[Scan Room]`/`[Benchmark]` 等），参见 `executor-{风格}.md`。
+
+**要求**：
+
+- 备注应口语化、自然流畅
+- 突出每页的核心信息和呈现要点
+- 用户可在 `notes/` 目录中手动编辑覆盖
+
+### 任务2：拆分为每页备注文件
+
+自动将 `notes/total.md` 拆分为 `notes/` 目录中的单独演讲备注文件。
+
+**文件命名约定**：
+
+- **推荐**：与SVG名称匹配（如 `01_cover.svg` → `notes/01_cover.md`）
+- **兼容**：也支持 `slide01.md` 格式（向后兼容）
+
+---
+
+## 9. 完成后的下一步
+
+> **自动继续**：视觉构建阶段（所有SVG页面）和逻辑构建阶段（所有备注）完成后，执行器直接进入后处理流水线。
+
+**后处理与导出**（参见 [shared-standards.md](shared-standards.md)）：
 
 ```bash
-# 1. Split speaker notes
-python3 scripts/total_md_split.py <project_path>
+# 1. 拆分演讲备注
+python3 scripts/total_md_split.py <项目路径>
 
-# 2. SVG post-processing (auto-embed icons, images, etc.)
-python3 scripts/finalize_svg.py <project_path>
+# 2. SVG后处理（自动嵌入图标、图片等）
+python3 scripts/finalize_svg.py <项目路径>
 
-# 3. Export PPTX
-python3 scripts/svg_to_pptx.py <project_path> -s final
-# Default: generates native shapes (.pptx) + SVG reference (_svg.pptx)
+# 3. 导出PPTX
+python3 scripts/svg_to_pptx.py <项目路径> -s final
+# 默认：生成原生形状(.pptx) + SVG参考(_svg.pptx)
 ```

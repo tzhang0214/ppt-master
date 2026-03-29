@@ -1,173 +1,174 @@
 ---
-description: Generate a new PPT layout template based on existing project files or reference templates
+description: 基于现有项目文件或参考模板生成新的 PPT 布局模板
 ---
 
-# Create New Template Workflow
+# 创建新模板工作流
 
-> **Role invoked**: [Template_Designer](../references/template-designer.md)
+> **调用角色**: [模板设计师](../references/template-designer.md)
 
-Generate a complete set of reusable PPT layout templates for the **global template library**.
+为**全局模板库**生成一套完整的可复用 PPT 布局模板。
 
-> This workflow is for **library asset creation**, not project-level one-off customization. The output must be reusable by future PPT projects and discoverable from `templates/layouts/layouts_index.json`.
+> 此工作流用于**库资源创建**，而非项目级一次性定制。输出必须可被未来的 PPT 项目复用，并能从 `templates/layouts/layouts_index.json` 中被发现。
 
-## Process Overview
+## 流程概览
 
 ```
-Gather Brief -> Create Directory -> Invoke Template_Designer -> Validate Assets -> Register Index -> Output
+收集需求 -> 创建目录 -> 调用模板设计师 -> 验证资源 -> 注册索引 -> 输出确认
 ```
 
 ---
 
-## Step 1: Gather Template Information
+## 步骤1：收集模板信息
 
-Confirm the following with the user:
+与用户确认以下内容：
 
-| Item | Required | Description |
-|------|----------|-------------|
-| New template ID | Yes | Template directory / index key. Prefer ASCII slug such as `my_company`; if using a Chinese brand name, it must be filesystem-safe and match `layouts_index.json` exactly |
-| Template display name | Yes | Human-readable name for documentation |
-| Category | Yes | One of `brand` / `general` / `scenario` / `government` / `special` |
-| Applicable scenarios | Yes | Typical use cases, such as annual report / defense / government briefing |
-| Tone summary | Yes | Short tone description for recommendation, such as `Modern, restrained, data-driven` |
-| Theme mode | Yes | Theme description for recommendation, such as `Light theme (white background + blue accent)` |
-| Canvas format | Yes | Default `ppt169`; if another format is needed, specify it explicitly before generation |
-| Reference source | Optional | Existing project or template path |
-| Theme color | Optional | Primary color HEX value (can be auto-extracted from reference) |
-| Design style | Optional | Additional style notes, decorative language, brand cues |
-| Assets list | Optional | Logos / background textures / reference images to include in the template package |
-| Quick lookup tags | Optional | Tags used in `layouts_index.json > quickLookup`, such as `technology`, `finance`, `academic` |
+| 项目 | 必填 | 描述 |
+|------|------|------|
+| 新模板 ID | 是 | 模板目录名 / 索引键。建议使用 ASCII 格式如 `my_company`；如使用中文品牌名，必须文件系统安全且与 `layouts_index.json` 完全匹配 |
+| 模板显示名称 | 是 | 用于文档的人类可读名称 |
+| 分类 | 是 | 属于以下之一：`brand` / `general` / `scenario` / `government` / `special` |
+| 适用场景 | 是 | 典型用例，如年度报告 / 答辩 / 政府简报 |
+| 风格概述 | 是 | 简短风格描述用于推荐，如 `现代、克制、数据驱动` |
+| 主题模式 | 是 | 用于推荐的风格描述，如 `浅色主题（白色背景 + 蓝色强调）` |
+| 画布格式 | 是 | 默认 `ppt169`；如需其他格式需在生成前明确指定 |
+| 参考来源 | 可选 | 现有项目或模板路径 |
+| 主题色 | 可选 | 主色 HEX 值（可从参考中自动提取） |
+| 设计风格 | 可选 | 额外的风格说明、装饰语言、品牌特征 |
+| 资源列表 | 可选 | 模板包中包含的 Logo / 背景纹理 / 参考图片 |
+| 快速查找标签 | 可选 | 用于 `layouts_index.json > quickLookup` 的标签，如 `technology`、`finance`、`academic` |
 
-**Required outcome of Step 1**:
+**步骤1的预期产出**：
 
-- The template is clearly positioned as a **global library template**
-- The canvas format is fixed before SVG generation
-- The template metadata is complete enough to register into `layouts_index.json`
+- 模板被明确定位为**全局库模板**
+- 画布格式在 SVG 生成前已固定
+- 模板元数据完整到可以注册到 `layouts_index.json`
 
-**If a reference source is provided**, analyze its structure first:
+**如果提供了参考来源**，首先分析其结构：
 
 ```bash
-ls -la "<reference_source_path>"
+ls -la "<参考来源路径>"
 ```
 
 ---
 
-## Step 2: Create Template Directory
+## 步骤2：创建模板目录
 
 ```bash
-mkdir -p "skills/ppt-master/templates/layouts/<template_id>"
+mkdir -p "skills/ppt-master/templates/layouts/<模板ID>"
 ```
 
-> **Output location**: Global templates go to `skills/ppt-master/templates/layouts/`; project templates go to `projects/<project>/templates/`
+> **输出位置**：全局模板到 `skills/ppt-master/templates/layouts/`；项目模板到 `projects/<项目>/templates/`
 >
-> The generated directory name must match the final template ID used in `layouts_index.json`.
+> 生成的目录名必须与 `layouts_index.json` 中使用的最终模板 ID 一致。
 
 ---
 
-## Step 3: Invoke Template_Designer Role
+## 步骤3：调用模板设计师角色
 
-**Switch to the Template_Designer role** and generate per role definition. The role input is the finalized template brief from Step 1, not a project design spec.
+**切换到 Template_Designer 角色**并按角色定义生成。角色输入的是步骤1中定稿的模板需求，而非项目设计规范。
 
-1. **design_spec.md** — Design specification document
-2. **4 core templates** — Cover, chapter, content, ending pages
-3. **TOC page (optional)** — `02_toc.svg`
-4. **Template assets (optional)** — Logos / PNG / JPG / reference SVG needed by the template package
+1. **design_spec.md** — 设计规范文档
+2. **4 个核心模板** — 封面、章节、内容、结束页
+3. **目录页（可选）** — `02_toc.svg`
+4. **模板资源（可选）** — 模板包所需的 Logo / PNG / JPG / 参考 SVG
 
-> **Role details**: See [template-designer.md](../references/template-designer.md)
+> **角色详情**：参见 [template-designer.md](../references/template-designer.md)
 
-**New-template placeholder contract (mandatory for newly created library templates)**:
+**新模板占位符约定（新建库模板的强制要求）**：
 
-- Cover: `{{TITLE}}`, `{{SUBTITLE}}`, `{{DATE}}`, `{{AUTHOR}}`
-- Chapter: `{{CHAPTER_NUM}}`, `{{CHAPTER_TITLE}}`
-- Content: `{{PAGE_TITLE}}`, `{{CONTENT_AREA}}`, `{{PAGE_NUM}}`
-- Ending: `{{THANK_YOU}}`, `{{CONTACT_INFO}}`
-- TOC: use indexed placeholders such as `{{TOC_ITEM_1_TITLE}}` and optional `{{TOC_ITEM_1_DESC}}`
+- 封面：`{{TITLE}}`、`{{SUBTITLE}}`、`{{DATE}}`、`{{AUTHOR}}`
+- 章节页：`{{CHAPTER_NUM}}`、`{{CHAPTER_TITLE}}`
+- 内容页：`{{PAGE_TITLE}}`、`{{CONTENT_AREA}}`、`{{PAGE_NUM}}`
+- 结束页：`{{THANK_YOU}}`、`{{CONTACT_INFO}}`
+- 目录页：使用索引式占位符如 `{{TOC_ITEM_1_TITLE}}` 和可选的 `{{TOC_ITEM_1_DESC}}`
 
-**Avoid** introducing one-off placeholder families such as `{{CHAPTER_01_TITLE}}` for new templates. If an extension placeholder is truly required, define it explicitly in `design_spec.md` and keep the naming pattern consistent.
+**避免**为新模板引入一次性占位符系列如 `{{CHAPTER_01_TITLE}}`。如果确实需要扩展占位符，请在 `design_spec.md` 中明确定义并保持命名模式一致。
 
 ---
 
-## Step 4: Validate Template Assets
+## 步骤4：验证模板资源
 
 ```bash
-ls -la "skills/ppt-master/templates/layouts/<template_id>"
+ls -la "skills/ppt-master/templates/layouts/<模板ID>"
 ```
 
-Run SVG validation on the template directory:
+对模板目录运行 SVG 验证：
 
 ```bash
-python3 skills/ppt-master/scripts/svg_quality_checker.py "skills/ppt-master/templates/layouts/<template_id>" --format <canvas_format>
+python3 skills/ppt-master/scripts/svg_quality_checker.py "skills/ppt-master/templates/layouts/<模板ID>" --format <画布格式>
 ```
 
-**Checklist**:
+**检查清单**：
 
-- [ ] `design_spec.md` contains complete design specification
-- [ ] All 4 core templates present
-- [ ] If TOC exists, placeholder pattern uses the canonical indexed form
-- [ ] SVG viewBox matches the chosen canvas format (for `ppt169`: `0 0 1280 720`)
-- [ ] Placeholder names are consistent with the new-template contract and `design_spec.md`
-- [ ] Asset files referenced by SVGs actually exist in the template package
+- [ ] SVG可以正常显示，没有语法错误
+- [ ] `design_spec.md` 包含完整的设计规范
+- [ ] 4 个核心模板全部存在
+- [ ] 如存在目录页，占位符模式使用规范的索引形式
+- [ ] SVG viewBox 与所选画布格式匹配（`ppt169` 为 `0 0 1280 720`）
+- [ ] 占位符名称与新模板约定和 `design_spec.md` 一致
+- [ ] SVG 引用的资源文件实际存在于模板包中
 
-This step is a **hard gate**. Do not register the template into the library index until validation passes.
+此步骤是**硬性门槛**。验证通过前不要将模板注册到库索引。
 
 ---
 
-## Step 5: Register Template in Library Index
+## 步骤5：在库索引中注册模板
 
-Update `skills/ppt-master/templates/layouts/layouts_index.json`:
+更新 `skills/ppt-master/templates/layouts/layouts_index.json`：
 
 - `meta.total`
 - `meta.updated`
-- the correct `categories.<category>.layouts` entry
-- the appropriate `quickLookup` entries
-- the new `layouts.<template_id>` metadata block
+- 正确的 `categories.<分类>.layouts` 条目
+- 适当的 `quickLookup` 条目
+- 新的 `layouts.<模板ID>` 元数据块
 
-`layouts_index.json` is the **source of truth** for template discovery in the main PPT generation workflow. A template directory that is not registered here is considered incomplete.
+`layouts_index.json` 是模板发现的事实来源，主 PPT 生成工作流依赖于此。一个未在此注册的模板目录被认为是未完成的。
 
-If the human-facing `templates/layouts/README.md` summary table is maintained manually, sync it after updating the JSON index. The JSON index takes priority.
+如果存在手动维护的人类可读的 `templates/layouts/README.md` 摘要表，请在更新 JSON 索引后同步。JSON 索引优先。
 
 ---
 
-## Step 6: Output Confirmation
+## 步骤6：输出确认
 
 ```markdown
-## Template Creation Complete
+## 模板创建完成
 
-**Template Name**: <template_id> (<display_name>)
-**Template Path**: `skills/ppt-master/templates/layouts/<template_id>/`
-**Category**: <category>
-**Canvas Format**: <canvas_format>
-**Index Registration**: Done
+**模板名称**: <模板ID> (<显示名称>)
+**模板路径**: `skills/ppt-master/templates/layouts/<模板ID>/`
+**分类**: <分类>
+**画布格式**: <画布格式>
+**索引注册**: 已完成
 
-### Files Included
+### 包含文件
 
-| File | Status |
-|------|--------|
-| `design_spec.md` | Done |
-| `01_cover.svg` | Done |
-| `02_chapter.svg` | Done |
-| `03_content.svg` | Done |
-| `04_ending.svg` | Done |
-| `02_toc.svg` | Optional |
+| 文件 | 状态 |
+|------|------|
+| `design_spec.md` | 已完成 |
+| `01_cover.svg` | 已完成 |
+| `02_chapter.svg` | 已完成 |
+| `03_content.svg` | 已完成 |
+| `04_ending.svg` | 已完成 |
+| `02_toc.svg` | 可选 |
 ```
 
 ---
 
-## Color Scheme Quick Reference
+## 配色方案快速参考
 
-| Style | Primary Color | Use Cases |
-|-------|---------------|-----------|
-| Tech Blue | `#004098` | Certification, evaluation |
-| McKinsey | `#005587` | Strategic consulting |
-| Government Blue | `#003366` | Government projects |
-| Business Gray | `#2C3E50` | General business |
+| 风格 | 主色 | 用例 |
+|------|------|------|
+| 科技蓝 | `#004098` | 认证、评估 |
+| 麦肯锡蓝 | `#005587` | 战略咨询 |
+| 政府蓝 | `#003366` | 政府项目 |
+| 商务灰 | `#2C3E50` | 通用商务 |
 
 ---
 
-## Notes
+## 注意事项
 
-1. **SVG technical constraints**: See the technical constraints section in [template-designer.md](../references/template-designer.md)
-2. **Color consistency**: All SVG files must use the same color scheme
-3. **Placeholder convention**: Use `{{}}` format and the canonical new-template placeholder contract above
-4. **Discovery requirement**: New templates must be added to `layouts_index.json`, otherwise the main workflow cannot recommend them
+1. **SVG 技术约束**：参见 [template-designer.md](../references/template-designer.md) 中的技术约束部分
+2. **色彩一致性**：所有 SVG 文件必须使用相同的配色方案
+3. **占位符约定**：使用 `{{}}` 格式和上述规范的新模板占位符约定
+4. **发现要求**：新模板必须添加到 `layouts_index.json`，否则主工作流无法推荐
 
-> **Detailed specification**: See [template-designer.md](../references/template-designer.md)
+> **详细规范**：参见 [template-designer.md](../references/template-designer.md)
