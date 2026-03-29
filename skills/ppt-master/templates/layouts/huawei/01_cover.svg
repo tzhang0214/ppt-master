@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFF5F0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:0.12" />
+      <stop offset="100%" style="stop-color:#F7931E;stop-opacity:0.08" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#B71C1C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C04000;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1280" height="720" fill="url(#bgGradient)" />
+
+  <!-- Right Side Geometric Decoration -->
+  <circle cx="1100" cy="200" r="280" fill="url(#circleGradient)" />
+  <circle cx="1150" cy="280" r="180" fill="#FF6B35" fill-opacity="0.06" />
+  <circle cx="1200" cy="150" r="120" fill="#F7931E" fill-opacity="0.08" />
+  <circle cx="1050" cy="400" r="100" fill="#FFD23F" fill-opacity="0.1" />
+  <circle cx="900" cy="550" r="60" fill="#D2691E" fill-opacity="0.08" />
+  <circle cx="1000" cy="600" r="40" fill="#FF7F50" fill-opacity="0.1" />
+
+  <!-- Top Accent Bar -->
+  <rect x="0" y="0" width="1280" height="6" fill="url(#accentGradient)" />
+
+  <!-- Left Side Decorative Element -->
+  <rect x="60" y="180" width="6" height="80" fill="#B71C1C" />
+
+  <!-- Main Title -->
+  <text x="90" y="250" font-family="Microsoft YaHei" font-size="56" font-weight="bold" fill="#B71C1C">{{TITLE}}</text>
+
+  <!-- Accent Line under title -->
+  <rect x="90" y="275" width="160" height="4" fill="url(#accentGradient)" />
+
+  <!-- Subtitle -->
+  <text x="90" y="340" font-family="Microsoft YaHei" font-size="28" fill="#666666">{{SUBTITLE}}</text>
+
+  <!-- Divider Line -->
+  <line x1="90" y1="400" x2="600" y2="400" stroke="#FFE5DC" stroke-width="1" />
+
+  <!-- Author and Date -->
+  <text x="90" y="460" font-family="Microsoft YaHei" font-size="20" fill="#333333">{{AUTHOR}}</text>
+  <text x="90" y="500" font-family="Microsoft YaHei" font-size="18" fill="#999999">{{DATE}}</text>
+
+  <!-- Bottom Decorative Bar -->
+  <rect x="0" y="680" width="1280" height="40" fill="#FFF5F0" />
+  <rect x="0" y="680" width="200" height="40" fill="url(#accentGradient)" />
+
+  <!-- Logo Area -->
+  <rect x="1100" y="50" width="140" height="50" fill="#FFF5F0" rx="4" />
+  <text x="1170" y="82" font-family="Microsoft YaHei" font-size="16" fill="#B71C1C" text-anchor="middle">{{LOGO}}</text>
+
+  <!-- Small geometric accents -->
+  <rect x="1200" y="620" width="40" height="40" fill="none" stroke="#B71C1C" stroke-width="2" stroke-opacity="0.3" />
+  <rect x="1210" y="630" width="20" height="20" fill="#B71C1C" fill-opacity="0.2" />
+</svg>

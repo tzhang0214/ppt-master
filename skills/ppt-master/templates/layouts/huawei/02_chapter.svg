@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="chapterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#B71C1C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C04000;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFD23F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFDB58;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1280" height="720" fill="url(#chapterGradient)" />
+
+  <!-- Top White Accent Line -->
+  <rect x="0" y="0" width="1280" height="6" fill="#FFFFFF" />
+
+  <!-- Geometric Decorations -->
+  <circle cx="-100" cy="800" r="400" fill="#FFFFFF" fill-opacity="0.05" />
+  <circle cx="1400" cy="-100" r="350" fill="#FFFFFF" fill-opacity="0.05" />
+  <circle cx="200" cy="150" r="80" fill="#FFD23F" fill-opacity="0.15" />
+  <circle cx="1100" cy="600" r="120" fill="#FF7F50" fill-opacity="0.1" />
+  <circle cx="900" cy="100" r="50" fill="#D2691E" fill-opacity="0.1" />
+
+  <!-- Chapter Number -->
+  <text x="640" y="260" font-family="Arial" font-size="120" font-weight="bold" fill="#FFFFFF" fill-opacity="0.2" text-anchor="middle">{{CHAPTER_NUM}}</text>
+
+  <!-- Chapter Title -->
+  <text x="640" y="340" font-family="Microsoft YaHei" font-size="56" font-weight="bold" fill="#FFFFFF" text-anchor="middle">{{CHAPTER_TITLE}}</text>
+
+  <!-- Accent Line -->
+  <rect x="520" y="370" width="240" height="4" fill="url(#accentGradient)" />
+
+  <!-- Chapter Description -->
+  <text x="640" y="430" font-family="Microsoft YaHei" font-size="20" fill="#FFFFFF" fill-opacity="0.85" text-anchor="middle">{{CHAPTER_DESC}}</text>
+
+  <!-- Bottom Decorative Elements -->
+  <rect x="0" y="640" width="1280" height="80" fill="#FFFFFF" fill-opacity="0.08" />
+  <rect x="0" y="680" width="1280" height="40" fill="#FFFFFF" fill-opacity="0.15" />
+  <rect x="0" y="680" width="200" height="40" fill="#FFD23F" fill-opacity="0.6" />
+
+  <!-- Geometric Accent -->
+  <rect x="1080" y="600" width="80" height="80" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.2" rx="4" />
+  <rect x="1100" y="620" width="40" height="40" fill="#FFD23F" fill-opacity="0.4" />
+
+  <rect x="120" y="600" width="80" height="80" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.2" rx="4" />
+  <rect x="140" y="620" width="40" height="40" fill="#FFD23F" fill-opacity="0.4" />
+
+  <!-- Huawei Logo in bottom right -->
+  <g transform="translate(1180, 660) scale(1.5)">
+    <path d="M10.341 17.042s.062-.061 0-.061C7.516 10.902 3.646 6.22 3.646 6.22S1.557 8.168 1.68 10.174c.061 1.52 1.228 2.37 1.228 2.37 1.843 1.763 6.266 4.012 7.31 4.499h.123zm-.737 1.52c0-.061-.123-.061-.123-.061l-7.371.243c.798 1.398 2.15 2.492 3.563 2.188.983-.243 3.194-1.763 3.87-2.25.123-.12.061-.12.061-.12zm.123-.67c.062-.06 0-.12 0-.12C6.471 15.581.206 12.3.206 12.3c-.553 1.763.184 3.161.184 3.161.798 1.702 2.334 2.189 2.334 2.189.676.303 1.413.303 1.413.303h5.529c.061 0 .061-.06.061-.06zm.492-14.831c-.308 0-1.168.243-1.168.243-1.965.486-2.395 2.249-2.395 2.249-.369 1.094 0 2.31 0 2.31.675 2.857 3.87 7.598 4.545 8.57l.062.062c.061 0 .061-.061.061-.061C12.43 5.796 10.22 3.06 10.22 3.06zm2.457 13.373c.061 0 .123-.061.123-.061.737-1.033 3.87-5.714 4.545-8.57 0 0 .369-1.399 0-2.31 0 0-.491-1.764-2.457-2.25 0 0-.553-.121-1.167-.243 0 0-2.211 2.796-1.106 13.312 0 .122.062.122.062.122zm1.72 2.067s-.062 0-.062.06v.122c.738.486 2.826 2.006 3.87 2.249 0 0 1.905.669 3.563-2.188l-7.371-.243zm9.398-6.261s-6.265 3.343-9.521 5.531c0 0-.062.06-.062.122 0 0 0 .06.062.06h5.651s.553 0 1.29-.303c0 0 1.536-.487 2.396-2.25 0-.06.737-1.458.184-3.16zM13.66 17.042s.061.06.122 0c1.045-.547 5.468-2.736 7.31-4.499 0 0 1.168-.911 1.23-2.37.122-2.067-1.967-3.951-1.967-3.951s-3.87 4.559-6.695 10.698c0 0-.062.06 0 .122z" fill="#FFFFFF"/>
+  </g>
+</svg>

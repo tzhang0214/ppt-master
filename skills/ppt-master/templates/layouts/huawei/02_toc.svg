@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="sidebarGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B71C1C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C04000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+
+  <!-- Left Sidebar -->
+  <rect x="0" y="0" width="320" height="720" fill="url(#sidebarGradient)" />
+
+  <!-- White Accent on Sidebar -->
+  <rect x="0" y="0" width="8" height="720" fill="#FFFFFF" fill-opacity="0.3" />
+
+  <!-- Sidebar Content -->
+  <text x="60" y="100" font-family="Arial" font-size="18" font-weight="bold" fill="#FFFFFF" letter-spacing="4">CONTENTS</text>
+  <text x="60" y="140" font-family="Microsoft YaHei" font-size="14" fill="#FFFFFF" fill-opacity="0.8">??</text>
+
+  <!-- Decorative Line -->
+  <rect x="60" y="165" width="80" height="3" fill="#FFD23F" />
+
+  <!-- Geometric Pattern on Sidebar -->
+  <circle cx="260" cy="600" r="150" fill="#FFFFFF" fill-opacity="0.1" />
+  <circle cx="280" cy="650" r="100" fill="#FFD23F" fill-opacity="0.08" />
+
+  <!-- Right Side - TOC Items -->
+  <!-- Item 1 -->
+  <rect x="380" y="140" width="50" height="50" fill="#FFF5F0" rx="4" />
+  <text x="405" y="175" font-family="Arial" font-size="24" font-weight="bold" fill="#B71C1C" text-anchor="middle">01</text>
+  <text x="460" y="160" font-family="Microsoft YaHei" font-size="24" font-weight="bold" fill="#B71C1C">{{TOC_ITEM_1_TITLE}}</text>
+  <text x="460" y="185" font-family="Microsoft YaHei" font-size="14" fill="#666666">{{TOC_ITEM_1_DESC}}</text>
+  <line x1="380" y1="210" x2="900" y2="210" stroke="#FFE5DC" stroke-width="1" />
+
+  <!-- Item 2 -->
+  <rect x="380" y="250" width="50" height="50" fill="#FFF5F0" rx="4" />
+  <text x="405" y="285" font-family="Arial" font-size="24" font-weight="bold" fill="#B71C1C" text-anchor="middle">02</text>
+  <text x="460" y="270" font-family="Microsoft YaHei" font-size="24" font-weight="bold" fill="#B71C1C">{{TOC_ITEM_2_TITLE}}</text>
+  <text x="460" y="295" font-family="Microsoft YaHei" font-size="14" fill="#666666">{{TOC_ITEM_2_DESC}}</text>
+  <line x1="380" y1="320" x2="900" y2="320" stroke="#FFE5DC" stroke-width="1" />
+
+  <!-- Item 3 -->
+  <rect x="380" y="360" width="50" height="50" fill="#FFF5F0" rx="4" />
+  <text x="405" y="395" font-family="Arial" font-size="24" font-weight="bold" fill="#B71C1C" text-anchor="middle">03</text>
+  <text x="460" y="380" font-family="Microsoft YaHei" font-size="24" font-weight="bold" fill="#B71C1C">{{TOC_ITEM_3_TITLE}}</text>
+  <text x="460" y="405" font-family="Microsoft YaHei" font-size="14" fill="#666666">{{TOC_ITEM_3_DESC}}</text>
+  <line x1="380" y1="430" x2="900" y2="430" stroke="#FFE5DC" stroke-width="1" />
+
+  <!-- Item 4 -->
+  <rect x="380" y="470" width="50" height="50" fill="#FFF5F0" rx="4" />
+  <text x="405" y="505" font-family="Arial" font-size="24" font-weight="bold" fill="#B71C1C" text-anchor="middle">04</text>
+  <text x="460" y="490" font-family="Microsoft YaHei" font-size="24" font-weight="bold" fill="#B71C1C">{{TOC_ITEM_4_TITLE}}</text>
+  <text x="460" y="515" font-family="Microsoft YaHei" font-size="14" fill="#666666">{{TOC_ITEM_4_DESC}}</text>
+  <line x1="380" y1="540" x2="900" y2="540" stroke="#FFE5DC" stroke-width="1" />
+
+  <!-- Footer -->
+  <rect x="0" y="690" width="1280" height="30" fill="#FFF8F5" />
+  <text x="40" y="710" font-family="Microsoft YaHei" font-size="12" fill="#999999">Smart Glasses</text>
+  <text x="1240" y="710" font-family="Arial" font-size="12" fill="#666666" text-anchor="end">{{PAGE_NUM}}</text>
+
+  <!-- Huawei Logo in bottom right -->
+  <g transform="translate(1180, 660) scale(1.5)">
+    <path d="M10.341 17.042s.062-.061 0-.061C7.516 10.902 3.646 6.22 3.646 6.22S1.557 8.168 1.68 10.174c.061 1.52 1.228 2.37 1.228 2.37 1.843 1.763 6.266 4.012 7.31 4.499h.123zm-.737 1.52c0-.061-.123-.061-.123-.061l-7.371.243c.798 1.398 2.15 2.492 3.563 2.188.983-.243 3.194-1.763 3.87-2.25.123-.12.061-.12.061-.12zm.123-.67c.062-.06 0-.12 0-.12C6.471 15.581.206 12.3.206 12.3c-.553 1.763.184 3.161.184 3.161.798 1.702 2.334 2.189 2.334 2.189.676.303 1.413.303 1.413.303h5.529c.061 0 .061-.06.061-.06zm.492-14.831c-.308 0-1.168.243-1.168.243-1.965.486-2.395 2.249-2.395 2.249-.369 1.094 0 2.31 0 2.31.675 2.857 3.87 7.598 4.545 8.57l.062.062c.061 0 .061-.061.061-.061C12.43 5.796 10.22 3.06 10.22 3.06zm2.457 13.373c.061 0 .123-.061.123-.061.737-1.033 3.87-5.714 4.545-8.57 0 0 .369-1.399 0-2.31 0 0-.491-1.764-2.457-2.25 0 0-.553-.121-1.167-.243 0 0-2.211 2.796-1.106 13.312 0 .122.062.122.062.122zm1.72 2.067s-.062 0-.062.06v.122c.738.486 2.826 2.006 3.87 2.249 0 0 1.905.669 3.563-2.188l-7.371-.243zm9.398-6.261s-6.265 3.343-9.521 5.531c0 0-.062.06-.062.122 0 0 0 .06.062.06h5.651s.553 0 1.29-.303c0 0 1.536-.487 2.396-2.25 0-.06.737-1.458.184-3.16zM13.66 17.042s.061.06.122 0c1.045-.547 5.468-2.736 7.31-4.499 0 0 1.168-.911 1.23-2.37.122-2.067-1.967-3.951-1.967-3.951s-3.87 4.559-6.695 10.698c0 0-.062.06 0 .122z" fill="#C04000"/>
+  </g>
+</svg>
